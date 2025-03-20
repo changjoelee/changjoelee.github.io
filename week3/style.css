@@ -1,0 +1,77 @@
+* {
+  color: hotpink;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{color:chocolate;
+text-transform: lowercase;
+font-size: 3rem;
+font-weight: 400;}
+h3 {
+  color: limegreen;
+    font-family: "Bytesized", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+  }
+  
+
+h2 {
+  color: aqua;
+}
+li {
+  color: rgb(203, 203, 26);
+}
+.blue-color {
+  color: black;
+    font-family: "Bytesized", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+#outcome {
+  color: blue;
+  border: 3px solid rebeccapurple;
+}
+body {
+  background-color: bisque;
+  font-size: 1.5rem;.bytesized-regular 
+    font-family: "Bytesized", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+section{
+    text-align: center;
+    border: 4px dashed green;
+}
+/*h1 {
+  color: red;
+  font: helvetica;
+}
+h2 {
+  color: rgb(17, 166, 166);
+}
+h3 {
+  color: green;
+}
+p {
+  color: gray;
+}
+/* cmd / */
+/*
+curly braces{}
+square braket []
+round brecket()
+semicolon ;
+color :
+syntax : rules of the lang
+parantheses <>
+hyphen -
+dot .
+hash #
+
+class has the higher rank then the element */
