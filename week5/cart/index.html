@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping cart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Space+Grotesk&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="outer">
+      <h1>Here are your picks:</h1>
+      <p>T-shirt x 1 = $10</p>
+      <p>Jeans x 1 = $50</p>
+      <p>Sneakers x 1 = $700</p>
+      <p>Backpack x 1 = $30</p>
+      <button id="submit" onclick="calculateTotal()">Calculate</button>
+      <p>Total price: <span id="total"></span></p>
+      <p>Discounted price: <span id="discount"></span></p>
+    </div>
+  </body>
+</html>
