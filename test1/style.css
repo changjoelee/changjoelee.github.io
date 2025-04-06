@@ -1,0 +1,131 @@
+/* 기본 리셋 및 폰트 지정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Futura Bold가 적용되도록 */
+  font-family: "Futura", sans-serif;
+}
+
+/* 달력 그리드: 7열 × 6행, 화면 전체 채움 */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 날짜 셀 */
+.day {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  position: relative;
+}
+
+/* 빈 셀 */
+.day.empty {
+  background: #f8f8f8;
+  border: none;
+}
+
+/* 날짜 링크: 셀 전체 클릭 가능하며, 폰트를 Futura Bold, 크기를 3rem로 확대 */
+.day a.day-link {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+/* 팝업 오버레이 (전역): 초기 상태에서 scale(0)으로 시작, 각 팝업별 transform-origin 지정 */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* 팝업 활성 상태 (:target) */
+.popup:target {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* 팝업 내용: 화면의 80% 차지 */
+.popup-content {
+  background: #fff;
+  border: 1px solid black;
+  width: 80vw;
+  height: 80vh;
+  position: relative;
+  overflow: auto;
+  text-align: center;
+  padding: 20px;
+}
+
+/* 닫기 버튼 */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 5px 10px;
+  background: #fff;
+  color: black;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.close-btn:hover {
+  background: #f0f0f0;
+}
+
+/* 개별 팝업의 transform-origin (예시)
+     - #popup1: 1일 셀
+     - #popup2: 2일 셀
+     - #popup3: 3일 셀
+     - #popup30: 30일 셀
+  */
+#popup1 {
+  transform-origin: 35.7% 8.33%;
+}
+
+#popup2 {
+  transform-origin: 50% 8.33%;
+}
+
+#popup3 {
+  transform-origin: 64.3% 8.33%;
+}
+
+#popup30 {
+  transform-origin: 50% 75%;
+}

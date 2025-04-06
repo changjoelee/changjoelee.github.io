@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Animated Calendar Popup from Cell</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="calendar">
+      <!-- 첫 번째 행: 앞의 두 셀은 빈칸 -->
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+      <div class="day"><a href="#popup1" class="day-link">1</a></div>
+      <div class="day"><a href="#popup2" class="day-link">2</a></div>
+      <div class="day"><a href="#popup3" class="day-link">3</a></div>
+      <div class="day"><a href="#popup4" class="day-link">4</a></div>
+      <div class="day"><a href="#popup5" class="day-link">5</a></div>
+
+      <!-- 두 번째 행: 6~12일 -->
+      <div class="day"><a href="#popup6" class="day-link">6</a></div>
+      <div class="day"><a href="#popup7" class="day-link">7</a></div>
+      <div class="day"><a href="#popup8" class="day-link">8</a></div>
+      <div class="day"><a href="#popup9" class="day-link">9</a></div>
+      <div class="day"><a href="#popup10" class="day-link">10</a></div>
+      <div class="day"><a href="#popup11" class="day-link">11</a></div>
+      <div class="day"><a href="#popup12" class="day-link">12</a></div>
+
+      <!-- 세 번째 행: 13~19일 -->
+      <div class="day"><a href="#popup13" class="day-link">13</a></div>
+      <div class="day"><a href="#popup14" class="day-link">14</a></div>
+      <div class="day"><a href="#popup15" class="day-link">15</a></div>
+      <div class="day"><a href="#popup16" class="day-link">16</a></div>
+      <div class="day"><a href="#popup17" class="day-link">17</a></div>
+      <div class="day"><a href="#popup18" class="day-link">18</a></div>
+      <div class="day"><a href="#popup19" class="day-link">19</a></div>
+
+      <!-- 네 번째 행: 20~26일 -->
+      <div class="day"><a href="#popup20" class="day-link">20</a></div>
+      <div class="day"><a href="#popup21" class="day-link">21</a></div>
+      <div class="day"><a href="#popup22" class="day-link">22</a></div>
+      <div class="day"><a href="#popup23" class="day-link">23</a></div>
+      <div class="day"><a href="#popup24" class="day-link">24</a></div>
+      <div class="day"><a href="#popup25" class="day-link">25</a></div>
+      <div class="day"><a href="#popup26" class="day-link">26</a></div>
+
+      <!-- 다섯 번째 행: 27~30일 및 빈 칸 -->
+      <div class="day"><a href="#popup27" class="day-link">27</a></div>
+      <div class="day"><a href="#popup28" class="day-link">28</a></div>
+      <div class="day"><a href="#popup29" class="day-link">29</a></div>
+      <div class="day"><a href="#popup30" class="day-link">30</a></div>
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+
+      <!-- 여섯 번째 행: 빈 셀 7개 -->
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+      <div class="day empty"></div>
+    </div>
+
+    <!-- 각 날짜에 해당하는 팝업 오버레이 (예시로 1, 2, 3, 30일만 추가) -->
+    <div id="popup1" class="popup">
+      <div class="popup-content">
+        <a href="#" class="close-btn">닫기</a>
+        <h2>1일의 상세 내용</h2>
+        <p>여기에 상세 내용을 입력하세요.</p>
+      </div>
+    </div>
+
+    <div id="popup2" class="popup">
+      <div class="popup-content">
+        <a href="#" class="close-btn">닫기</a>
+        <h2>2일의 상세 내용</h2>
+        <p>여기에 상세 내용을 입력하세요.</p>
+      </div>
+    </div>
+
+    <div id="popup3" class="popup">
+      <div class="popup-content">
+        <a href="#" class="close-btn">닫기</a>
+        <h2>3일의 상세 내용</h2>
+        <p>여기에 상세 내용을 입력하세요.</p>
+      </div>
+    </div>
+
+    <div id="popup30" class="popup">
+      <div class="popup-content">
+        <a href="#" class="close-btn">닫기</a>
+        <h2>30일의 상세 내용</h2>
+        <p>여기에 상세 내용을 입력하세요.</p>
+      </div>
+    </div>
+  </body>
+</html>
