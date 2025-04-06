@@ -1,98 +1,535 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Animated Calendar Popup from Cell</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Layout with Door Animations and Popup</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background-color: #666; /* Gray background */
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 3fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        border: 1px solid black;
+        background-color: white;
+        max-width: none;
+        margin: 0;
+      }
+
+      .grid-item {
+        border: 1px solid black;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        background-color: black; /* Black background behind doors */
+      }
+
+      .number {
+        position: absolute;
+        top: 10px;
+        left: 10px; /* Changed from right to left */
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 2;
+        color: black; /* Initial color is black */
+        transition: color 0.5s ease;
+      }
+
+      .door {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        transform-origin: left center;
+        transition: transform 0.7s ease-in-out;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .door-content {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+        color: white; /* Changed to white for visibility on black background */
+        text-align: center;
+        padding: 10px;
+      }
+
+      .door.open {
+        transform: perspective(1200px) rotateY(-105deg);
+      }
+
+      .door.open + .door-content {
+        opacity: 1;
+      }
+
+      /* Popup styles */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 100;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s;
+      }
+
+      .popup {
+        background-color: white;
+        padding: 30px;
+        border-radius: 5px;
+        width: 75%;
+        height: 75%;
+        position: absolute;
+        transform: scale(0);
+        transition: transform 0.5s ease, left 0.5s ease, top 0.5s ease;
+        transform-origin: top left; /* Default, will be dynamically changed */
+        overflow-y: auto;
+      }
+
+      .popup-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .popup-overlay.active .popup {
+        transform: scale(1);
+      }
+
+      .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #333;
+      }
+
+      .popup-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .popup-content {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #555;
+      }
+
+      /* Top row spans 3 columns with different widths */
+      .item1 {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        background-color: white; /* Keeping non-numbered cells white */
+      }
+
+      .item2 {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+      }
+
+      .item3 {
+        grid-column: 3 / 5;
+        grid-row: 1 / 2;
+        background-color: white; /* Keeping non-numbered cells white */
+      }
+
+      /* 3x4 grid on bottom left */
+      .item4 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+
+      .item5 {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+      }
+
+      .item6 {
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+      }
+
+      .item7 {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+      }
+
+      .item8 {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+      }
+
+      .item9 {
+        grid-column: 3 / 4;
+        grid-row: 3 / 4;
+      }
+
+      .item10 {
+        grid-column: 1 / 2;
+        grid-row: 4 / 5;
+      }
+
+      .item11 {
+        grid-column: 2 / 3;
+        grid-row: 4 / 5;
+      }
+
+      .item12 {
+        grid-column: 3 / 4;
+        grid-row: 4 / 5;
+      }
+
+      .item13 {
+        grid-column: 1 / 2;
+        grid-row: 5 / 6;
+      }
+
+      .item14 {
+        grid-column: 2 / 3;
+        grid-row: 5 / 6;
+      }
+
+      .item15 {
+        grid-column: 3 / 4;
+        grid-row: 5 / 6;
+      }
+
+      /* Large empty space on bottom right */
+      .item16 {
+        grid-column: 4 / 5;
+        grid-row: 2 / 6;
+        background-color: white; /* Keeping non-numbered cells white */
+      }
+    </style>
   </head>
   <body>
-    <div class="calendar">
-      <!-- 첫 번째 행: 앞의 두 셀은 빈칸 -->
-      <div class="day empty"></div>
-      <div class="day empty"></div>
-      <div class="day"><a href="#popup1" class="day-link">1</a></div>
-      <div class="day"><a href="#popup2" class="day-link">2</a></div>
-      <div class="day"><a href="#popup3" class="day-link">3</a></div>
-      <div class="day"><a href="#popup4" class="day-link">4</a></div>
-      <div class="day"><a href="#popup5" class="day-link">5</a></div>
+    <div class="container">
+      <!-- Top row -->
+      <div class="grid-item item1">
+        <div
+          style="
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          "
+        >
+          <h1
+            style="
+              font-family: Helvetica, Arial, sans-serif;
+              font-size: 36px;
+              font-weight: bold;
+              line-height: 1.2;
+              margin-bottom: 10px;
+            "
+          >
+            Interactive<br />Media
+          </h1>
+        </div>
+      </div>
+      <div class="grid-item item2">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #1</div>
+      </div>
+      <div class="grid-item item3">
+        <div
+          style="
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          "
+        >
+          <h2
+            style="
+              font-family: Helvetica, Arial, sans-serif;
+              font-size: 24px;
+              font-weight: bold;
+              line-height: 1.5;
+              margin-bottom: 10px;
+              text-decoration: underline;
+            "
+          >
+            Assignment One
+          </h2>
+          <p style="font-family: Helvetica, Arial, sans-serif; font-size: 20px">
+            ChangjoeLee
+          </p>
+        </div>
+      </div>
 
-      <!-- 두 번째 행: 6~12일 -->
-      <div class="day"><a href="#popup6" class="day-link">6</a></div>
-      <div class="day"><a href="#popup7" class="day-link">7</a></div>
-      <div class="day"><a href="#popup8" class="day-link">8</a></div>
-      <div class="day"><a href="#popup9" class="day-link">9</a></div>
-      <div class="day"><a href="#popup10" class="day-link">10</a></div>
-      <div class="day"><a href="#popup11" class="day-link">11</a></div>
-      <div class="day"><a href="#popup12" class="day-link">12</a></div>
+      <!-- 3x4 grid on bottom left -->
+      <div class="grid-item item4">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #2</div>
+      </div>
+      <div class="grid-item item5">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #3</div>
+      </div>
+      <div class="grid-item item6">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #4</div>
+      </div>
+      <div class="grid-item item7">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #5</div>
+      </div>
+      <div class="grid-item item8">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #6</div>
+      </div>
+      <div class="grid-item item9">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #7</div>
+      </div>
+      <div class="grid-item item10">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #8</div>
+      </div>
+      <div class="grid-item item11">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #9</div>
+      </div>
+      <div class="grid-item item12">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #10</div>
+      </div>
+      <div class="grid-item item13">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #11</div>
+      </div>
+      <div class="grid-item item14">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #12</div>
+      </div>
+      <div class="grid-item item15">
+        <div class="number">Q.1</div>
+        <div class="door">
+          <span>Click to open</span>
+        </div>
+        <div class="door-content">Behind door #13</div>
+      </div>
 
-      <!-- 세 번째 행: 13~19일 -->
-      <div class="day"><a href="#popup13" class="day-link">13</a></div>
-      <div class="day"><a href="#popup14" class="day-link">14</a></div>
-      <div class="day"><a href="#popup15" class="day-link">15</a></div>
-      <div class="day"><a href="#popup16" class="day-link">16</a></div>
-      <div class="day"><a href="#popup17" class="day-link">17</a></div>
-      <div class="day"><a href="#popup18" class="day-link">18</a></div>
-      <div class="day"><a href="#popup19" class="day-link">19</a></div>
-
-      <!-- 네 번째 행: 20~26일 -->
-      <div class="day"><a href="#popup20" class="day-link">20</a></div>
-      <div class="day"><a href="#popup21" class="day-link">21</a></div>
-      <div class="day"><a href="#popup22" class="day-link">22</a></div>
-      <div class="day"><a href="#popup23" class="day-link">23</a></div>
-      <div class="day"><a href="#popup24" class="day-link">24</a></div>
-      <div class="day"><a href="#popup25" class="day-link">25</a></div>
-      <div class="day"><a href="#popup26" class="day-link">26</a></div>
-
-      <!-- 다섯 번째 행: 27~30일 및 빈 칸 -->
-      <div class="day"><a href="#popup27" class="day-link">27</a></div>
-      <div class="day"><a href="#popup28" class="day-link">28</a></div>
-      <div class="day"><a href="#popup29" class="day-link">29</a></div>
-      <div class="day"><a href="#popup30" class="day-link">30</a></div>
-      <div class="day empty"></div>
-      <div class="day empty"></div>
-      <div class="day empty"></div>
-
-      <!-- 여섯 번째 행: 빈 셀 7개 -->
-      <div class="day empty"></div>
-      <div class="day empty"></div>
-      <div class="day empty"></div>
-      <div class="day empty"></div>
-      <div class="day empty"></div>
-      <div class="day empty"></div>
-      <div class="day empty"></div>
+      <!-- Large empty space on bottom right -->
+      <div class="grid-item item16"></div>
     </div>
 
-    <!-- 각 날짜에 해당하는 팝업 오버레이 (예시로 1, 2, 3, 30일만 추가) -->
-    <div id="popup1" class="popup">
-      <div class="popup-content">
-        <a href="#" class="close-btn">닫기</a>
-        <h2>1일의 상세 내용</h2>
-        <p>여기에 상세 내용을 입력하세요.</p>
+    <!-- Popup overlay -->
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup">
+        <div class="popup-close" id="popupClose">&times;</div>
+        <h2 class="popup-title" id="popupTitle">Question</h2>
+        <div class="popup-content" id="popupContent">You've opened a door!</div>
       </div>
     </div>
 
-    <div id="popup2" class="popup">
-      <div class="popup-content">
-        <a href="#" class="close-btn">닫기</a>
-        <h2>2일의 상세 내용</h2>
-        <p>여기에 상세 내용을 입력하세요.</p>
-      </div>
-    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get all door elements
+        const doors = document.querySelectorAll(".door");
+        const popupOverlay = document.getElementById("popupOverlay");
+        const popupClose = document.getElementById("popupClose");
+        const popupContent = document.getElementById("popupContent");
 
-    <div id="popup3" class="popup">
-      <div class="popup-content">
-        <a href="#" class="close-btn">닫기</a>
-        <h2>3일의 상세 내용</h2>
-        <p>여기에 상세 내용을 입력하세요.</p>
-      </div>
-    </div>
+        // Close popup when clicking the X
+        popupClose.addEventListener("click", function () {
+          popupOverlay.classList.remove("active");
+        });
 
-    <div id="popup30" class="popup">
-      <div class="popup-content">
-        <a href="#" class="close-btn">닫기</a>
-        <h2>30일의 상세 내용</h2>
-        <p>여기에 상세 내용을 입력하세요.</p>
-      </div>
-    </div>
+        // Close popup when clicking outside
+        popupOverlay.addEventListener("click", function (e) {
+          if (e.target === popupOverlay) {
+            popupOverlay.classList.remove("active");
+          }
+        });
+
+        // Add click event to each door
+        doors.forEach((door, index) => {
+          door.addEventListener("click", function () {
+            // Get the door number
+            const doorNumber = index + 1;
+
+            // Open the door
+            this.classList.add("open");
+
+            // Show the content
+            const content = this.nextElementSibling;
+            content.style.opacity = "1";
+
+            // Change number color to white
+            const gridItem = this.closest(".grid-item");
+            const number = gridItem.querySelector(".number");
+            if (number) {
+              number.style.color = "white";
+            }
+
+            // Set popup title to show question number
+            document.getElementById(
+              "popupTitle"
+            ).textContent = `Question ${doorNumber}`;
+
+            // Set popup content based on door number
+            popupContent.innerHTML = `
+                        <p>You've opened question #${doorNumber}!</p>
+                        <p>This is content for question #${doorNumber}.</p>
+                        <p>Here's some more information that you might find interesting about this particular question.</p>
+                        <p>The content in this popup fills 75% of your screen, giving you plenty of space to display information, images, or interactive elements.</p>
+                        <p>This larger popup creates a more immersive experience when interacting with the grid elements.</p>
+                        <p>Each question can reveal different content, creating a unique discovery experience as you explore the grid.</p>
+                        <br>
+                        <p>This is additional content to demonstrate the scrolling capability of the popup if needed for longer content.</p>
+                        <p>Questions can represent different categories, chapters, or sections of your assignment.</p>
+                        <p>The animation that brings you from the door to this expanded view creates a smooth transitional experience.</p>
+                    `;
+
+            // Get the position of the door for the popup origin
+            const doorRect = gridItem.getBoundingClientRect();
+            const popup = document.querySelector(".popup");
+
+            // Calculate viewport center
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const centerX = viewportWidth / 2;
+            const centerY = viewportHeight / 2;
+
+            // First position the popup at the door's position (starting point)
+            popup.style.left = doorRect.left + "px";
+            popup.style.top = doorRect.top + "px";
+
+            // Set transform origin to match the door's position
+            popup.style.transformOrigin = "top left";
+
+            // Show popup with slight delay for door opening animation to be visible
+            setTimeout(() => {
+              popupOverlay.classList.add("active");
+
+              // Calculate popup dimensions when expanded
+              const popupWidth = popup.offsetWidth;
+              const popupHeight = popup.offsetHeight;
+
+              // Calculate target position (centered, with adjustments to keep on screen)
+              let targetLeft = centerX - popupWidth / 2;
+              let targetTop = centerY - popupHeight / 2;
+
+              // Ensure the popup stays within viewport boundaries
+              targetLeft = Math.max(
+                20,
+                Math.min(viewportWidth - popupWidth - 20, targetLeft)
+              );
+              targetTop = Math.max(
+                20,
+                Math.min(viewportHeight - popupHeight - 20, targetTop)
+              );
+
+              // Move the popup toward the center while it's zooming out
+              setTimeout(() => {
+                popup.style.left = targetLeft + "px";
+                popup.style.top = targetTop + "px";
+              }, 50); // Small delay to ensure the active class has been applied
+            }, 700);
+
+            // Set timeout to close the door after 3 seconds
+            setTimeout(() => {
+              // Only close the door if popup is not active
+              if (!popupOverlay.classList.contains("active")) {
+                this.classList.remove("open");
+                content.style.opacity = "0";
+
+                // Change number color back to black
+                if (number) {
+                  number.style.color = "black";
+                }
+              }
+            }, 3000);
+          });
+        });
+
+        // When popup is closed, check if door needs to be closed
+        popupClose.addEventListener("click", function () {
+          const openDoor = document.querySelector(".door.open");
+          if (openDoor) {
+            // Check if door has been open for more than 3 seconds
+            const gridItem = openDoor.closest(".grid-item");
+            const content = openDoor.nextElementSibling;
+            const number = gridItem.querySelector(".number");
+
+            openDoor.classList.remove("open");
+            content.style.opacity = "0";
+
+            // Change number color back to black
+            if (number) {
+              number.style.color = "black";
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>

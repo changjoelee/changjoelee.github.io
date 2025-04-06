@@ -39,6 +39,7 @@ body {
 }
 
 /* 날짜 링크: 셀 전체 클릭 가능하며, 폰트를 Futura Bold, 크기를 3rem로 확대 */
+/* 수정: 애니메이션 효과 추가 */
 .day a.day-link {
   text-decoration: none;
   color: inherit;
@@ -49,6 +50,14 @@ body {
   align-items: center;
   font-size: 3rem;
   font-weight: bold;
+  transition: transform 0.5s ease;
+  transform-origin: center bottom;
+}
+
+/* 클릭 시: 셀이 위로 열리는 애니메이션 효과 */
+.day a.day-link:active,
+.day a.day-link:focus {
+  transform: perspective(600px) rotateX(-90deg);
 }
 
 /* 팝업 오버레이 (전역): 초기 상태에서 scale(0)으로 시작, 각 팝업별 transform-origin 지정 */
@@ -72,7 +81,9 @@ body {
 }
 
 /* 팝업 활성 상태 (:target) */
+/* 수정: transition-delay 추가하여 셀 애니메이션 후에 팝업 등장 */
 .popup:target {
+  transition-delay: 0.5s;
   opacity: 1;
   transform: scale(1);
   pointer-events: auto;
