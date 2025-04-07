@@ -1,142 +1,229 @@
-/* 기본 리셋 및 폰트 지정 */
+/* Reset default browser spacing and box model for consistent layout */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Set full viewport size and background for the page */
+/* Note: overflow: hidden disables all scrolling — use carefully */
 html,
 body {
-  width: 100%;
   height: 100%;
+  width: 100%;
   overflow: hidden;
-  /* Futura Bold가 적용되도록 */
-  font-family: "Futura", sans-serif;
+  background-color: #666; /* Gray background */
 }
 
-/* 달력 그리드: 7열 × 6행, 화면 전체 채움 */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  width: 100vw;
+/* Main grid container for layout */
+.container {
+  width: 100%;
   height: 100vh;
-}
+  display: grid;
 
-/* 날짜 셀 */
-.day {
+  /* 4 columns — the last one is wider (2.7fr) to emphasize content */
+  grid-template-columns: 1.1fr 1.1fr 1.1fr 2.7fr;
+
+  /* 5 rows evenly distributed */
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+
   border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
+  background-color: white;
+}
+
+/* Styling for h1 in .item1 — responsive sizing and word wrapping */
+.grid-item.item1 h1 {
+  font-size: min(4vw, 4vh, 36px); /* Responsive size with max cap */
+  word-wrap: break-word;
+  hyphens: auto;
+  padding: 5px;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+/* Base font setup */
+h1,
+h2,
+p {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* Base styling for all grid items */
+.grid-item {
+  border: 1px solid black;
   position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: black; /* Default background — ensure text contrast */
 }
 
-/* 빈 셀 */
-.day.empty {
-  background: #f8f8f8;
-  border: none;
+/* Number label inside grid items */
+.number {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: clamp(14px, 1.5vw, 24px); /* Responsive with min and max */
+  font-weight: bold;
+  z-index: 2;
+  color: black;
+  transition: color 0.5s ease; /* Smooth color change */
 }
 
-/* 날짜 링크: 셀 전체 클릭 가능하며, 폰트를 Futura Bold, 크기를 3rem로 확대 */
-/* 수정: 애니메이션 효과 추가 */
-.day a.day-link {
-  text-decoration: none;
-  color: inherit;
+/* Hidden by default — used for popup toggle mechanism */
+.popup-toggle {
+  display: none;
+}
+
+/* The clickable door/card area inside a grid item */
+.door {
+  position: relative;
   width: 100%;
   height: 100%;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.4s ease-in-out; /* Optional animation effect */
+}
+
+/* Door label styling */
+.door span {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
   font-weight: bold;
-  transition: transform 0.5s ease;
-  transform-origin: center bottom;
 }
 
-/* 클릭 시: 셀이 위로 열리는 애니메이션 효과 */
-.day a.day-link:active,
-.day a.day-link:focus {
-  transform: perspective(600px) rotateX(-90deg);
+/* Specific positioning and background color for individual items */
+.item1 {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  background-color: white;
 }
 
-/* 팝업 오버레이 (전역): 초기 상태에서 scale(0)으로 시작, 각 팝업별 transform-origin 지정 */
-.popup {
+.item2 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.item3 {
+  grid-column: 3 / 5;
+  grid-row: 1 / 2;
+  background-color: white;
+}
+
+.item16 {
+  grid-column: 4 / 5;
+  grid-row: 2 / 6;
+  background-color: white;
+}
+
+/* For stacking and vertically centering content */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Large content area — scrollable and padded */
+.content-container-large {
+  padding: 20px;
+  text-align: left;
+  overflow-y: auto;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Popup overlay — hidden by default */
+.popup-section {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.95);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+  z-index: 1000;
+}
+
+/* When popup is targeted by anchor, make it visible */
+.popup-section:target {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-
-  opacity: 0;
-  transform: scale(0);
-  pointer-events: none;
-
-  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-/* 팝업 활성 상태 (:target) */
-/* 수정: transition-delay 추가하여 셀 애니메이션 후에 팝업 등장 */
-.popup:target {
-  transition-delay: 0.5s;
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-}
-
-/* 팝업 내용: 화면의 80% 차지 */
-.popup-content {
-  background: #fff;
-  border: 1px solid black;
-  width: 80vw;
-  height: 80vh;
+/* Main popup box */
+.popup {
+  width: 75%;
+  height: 75%;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
   position: relative;
-  overflow: auto;
-  text-align: center;
-  padding: 20px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
-/* 닫기 버튼 */
-.close-btn {
+/* Close button inside popup */
+.popup-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  color: #333;
   text-decoration: none;
-  border: 1px solid black;
-  padding: 5px 10px;
-  background: #fff;
-  color: black;
-  font-size: 14px;
-  transition: background 0.3s;
+  font-weight: bold;
 }
 
-.close-btn:hover {
-  background: #f0f0f0;
+/* Popup title */
+.popup-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-/* 개별 팝업의 transform-origin (예시)
-     - #popup1: 1일 셀
-     - #popup2: 2일 셀
-     - #popup3: 3일 셀
-     - #popup30: 30일 셀
-  */
-#popup1 {
-  transform-origin: 35.7% 8.33%;
+/* General content styling inside popup */
+.popup-content {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
-#popup2 {
-  transform-origin: 50% 8.33%;
+/* Subheadings in popup */
+.popup-content h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #222;
 }
 
-#popup3 {
-  transform-origin: 64.3% 8.33%;
+/* Paragraphs in popup */
+.popup-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #444;
 }
 
-#popup30 {
-  transform-origin: 50% 75%;
+/* Unordered lists in popup */
+.popup-content ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
 }
+
+/* List items in popup */
+.popup-content li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+  font-size: 16px;
+  color: #444;
+}
+
+/* 
+  📝 Design Choice Commentary:
+  This section uses a minimalist, clean, and grid-based layout to align with the aesthetic of the selected website.
+  The use of whitespace, soft typography, and simple lines supports clarity and focus on content,
+  which is essential in minimalistic web design. The clean structure also enhances usability and visual hierarchy.
+*/

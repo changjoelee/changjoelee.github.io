@@ -1,33 +1,523 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>assingement 1</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Grid Layout with CSS-Only Popups</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <input type="checkbox" id="q1-toggle" class="popup-toggle">
+ 
+    </a>
+    
     <div class="container">
-      <header>
-        <h1 class="title">PALAT2023</h1>
-        <p class="subtitle">Creative Developer & Visual Designer</p>
-      </header>
+      <!-- Top row -->
+      <div class="grid-item item1">
+        <div class="content-container">
+          <h1>Interactive<br />Media</h1>
+        </div>
+      </div>
+      <div class="grid-item item2">
+        <div class="number">Q.1</div>
+        <a href="#popup1" class="door">
+          <span>Click to open</span>
+        </a>
+      </div>
+      <div class="grid-item item3">
+        <div class="content-container">
+          <h2>Assignment One</h2>
+          <p>ChangjoeLee</p>
+        </div>
+      </div>
 
-      <section class="image-section">
-        <img src="https://placehold.co/600x400/png" alt="예시 이미지" />
-      </section>
+      <!-- 3x4 grid on bottom left -->
+      <div class="grid-item item4">
+        <div class="number">Q.2</div>
+        <a href="#popup2" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item5">
+        <div class="number">Q.3</div>
+        <a href="#popup3" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item6">
+        <div class="number">Q.4</div>
+        <a href="#popup4" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item7">
+        <div class="number">Q.5</div>
+        <a href="#popup5" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item8">
+        <div class="number">Q.6</div>
+        <a href="#popup6" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item9">
+        <div class="number">Q.7</div>
+        <a href="#popup7" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item10">
+        <div class="number">Q.8</div>
+        <a href="#popup8" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item11">
+        <div class="number">Q.9</div>
+        <a href="#popup9" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item12">
+        <div class="number">Q.10</div>
+        <a href="#popup10" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item13">
+        <div class="number">Q.11</div>
+        <a href="#popup11" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item14">
+        <div class="number">Q.12</div>
+        <a href="#popup12" class="door">
+          <span></span>
+        </a>
+      </div>
+      <div class="grid-item item15">
+        <div class="number">Q.13</div>
+        <a href="#popup13" class="door">
+          <span></span>
+        </a>
+      </div>
 
-      <section class="description">
-        <p>
-          Interactive visuals, creative coding, and digital art exploration.
-        </p>
-      </section>
+      <!-- Large empty space on bottom right -->
+      <div class="grid-item item16">
+        <label for="inversion-toggle" class="inversion-label"></label>
+        <div
+          style="
+            padding: 20px;
+            text-align: left;
+            overflow-y: auto;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+          "
+        >
+          <h2
+            style="
+              font-size: min(3vw, 3.5vh, 32px);
+              font-weight: bold;
+              margin-bottom: 20px;
+            "
+          >
+            Experience Research Project
+          </h2>
+          <p
+            style="
+              font-size: min(1.8vw, 2vh, 16px);
+              line-height: 1.5;
+              margin-bottom: 15px;
+            "
+          >
+            I believe the purpose of this assignment was to encourage us to
+            engage more critically and thoughtfully with interactive design.
+            Rather than focusing solely on aesthetics or functionality, we were
+            asked to reflect on how an experience feels, how it shapes user
+            behavior, and how it communicates ideas through structure and
+            metaphor.
+          </p>
+          <p
+            style="
+              font-size: min(1.8vw, 2vh, 16px);
+              line-height: 1.5;
+              margin-bottom: 15px;
+            "
+          >
+            MyoungAe Kim's portfolio, with its advent calendar-inspired layout,
+            invites exploration in a playful and nonlinear way. This challenges
+            the typical expectations of a digital portfolio and shows how design
+            can be used to guide interaction and create emotional impact.
+          </p>
+          <p
+            style="
+              font-size: min(1.8vw, 2vh, 16px);
+              line-height: 1.5;
+              margin-bottom: 15px;
+            "
+          >
+            I think the lecturer wanted us to understand that interactive media
+            isn't just about usability — it's also about storytelling, mood, and
+            user engagement over time. It was also likely intended to inspire us
+            creatively, showing how digital experiences can break away from
+            conventional formats and become more personal, conceptual, and
+            meaningful.
+          </p>
+        </div>
+      </div>
+    </div>
 
-      <footer>
-        <a href="#">Work</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </footer>
+    <!-- Popup Sections -->
+    <div id="popup1" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 1</h2>
+        <div class="popup-content">
+          <h3>
+            1) What was the first thing you paid attention to when interacting
+            with the experience?
+          </h3>
+
+          <p>
+            The first thing that caught my attention was the
+            <strong>grid of numbered boxes</strong> on the homepage. It
+            immediately stood out as unusual for a portfolio. Most portfolios
+            use thumbnails, categories, or project names — but here, the numbers
+            were uniform and abstract. This sparked curiosity. The layout
+            reminded me of a <strong>calendar or game board</strong>, evoking a
+            sense of discovery. I was visually drawn in, trying to guess what
+            could be behind each square, with no immediate clues — just numbers
+            inviting me to interact.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup2" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 2</h2>
+        <div class="popup-content">
+          <h3>
+            2) Spend two minutes with the experience and create a list of each
+            of your discrete actions.
+          </h3>
+          <ul>
+            <li>
+              Landed on the homepage and scanned the full layout of numbered
+              boxes.
+            </li>
+            <li>
+              Paused to consider what the numbers might represent (dates? order
+              of projects?).
+            </li>
+            <li>
+              Hovered over a few numbers to check for hover animations (subtle
+              change).
+            </li>
+            <li>
+              Clicked on box #1 to see what would happen — a project opened in a
+              smooth animation.
+            </li>
+            <li>
+              Scrolled down within the project to view images, descriptions, and
+              layout.
+            </li>
+            <li>
+              Read through the project narrative and examined the visuals.
+            </li>
+            <li>Clicked a close or back button to return to the homepage.</li>
+            <li>
+              Clicked on #6 — a different project opened with its own distinct
+              tone and aesthetic.
+            </li>
+            <li>
+              Spent time with the layout and read the textual content again.
+            </li>
+            <li>
+              Closed the window, returned to grid — randomly clicked on a higher
+              number like #17.
+            </li>
+            <li>
+              Continued this cycle — opening, reading, closing — noting how each
+              experience was unique.
+            </li>
+            <li>
+              Attempted to navigate through a menu, but there was none —
+              navigation is solely through the calendar.
+            </li>
+            <li>
+              Reflected on how different this interaction model is from
+              traditional web navigation.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup3" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 3</h2>
+        <div class="popup-content">
+          <h3>
+            3) What part of the experience did you spend the most time engaging
+            with?
+          </h3>
+          <p>
+            The individual project panels held my attention the longest. Once a
+            numbered square was clicked, the screen transitioned into a
+            full-page display of a single project. These were rich in content —
+            high-quality images, thoughtful text, and consistent visual styles.
+            I found myself absorbed in reading the designer's process and
+            examining her use of type, color, motion, or interactivity. The
+            contrast between the abstract grid and the rich inner world of each
+            project created a satisfying rhythm that made me want to keep
+            opening more.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup4" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 4</h2>
+        <div class="popup-content">
+          <h3>
+            4) What was the most common action in your two-minute interaction
+            with the experience?
+          </h3>
+          <p>
+            Clicking on numbered boxes to reveal projects, then returning to the
+            grid. That pattern — click, discover, explore, return — became the
+            loop of interaction. It felt organic, not forced. There was no need
+            to follow an order. It was like a treasure hunt, discovering a new
+            layer of her portfolio with each interaction.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup5" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 5</h2>
+        <div class="popup-content">
+          <h3>
+            5) What is your impression of the intended primary goal of the
+            interactive experience?
+          </h3>
+          <p>
+            The main goal seems to be to create a playful, exploratory space for
+            showcasing design work. MyoungAe Kim likely wants users to engage
+            with her portfolio not just as viewers, but as active participants,
+            navigating intuitively and discovering her work piece by piece. This
+            approach mirrors her design philosophy — one that values
+            interaction, curiosity, and emotional resonance. It's not just about
+            viewing work; it's about experiencing it through micro-surprises and
+            personal engagement.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup6" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 6</h2>
+        <div class="popup-content">
+          <h3>
+            6) How does the interactive experience communicate this primary
+            goal?
+          </h3>
+          <p>
+            The interface strips away traditional portfolio conventions — no
+            menus, no categories, no filters. Instead, the numbered boxes are a
+            form of visual metaphor for discovery. There's a gentle gamification
+            at play, where each project becomes a reward for your curiosity. The
+            design also avoids overwhelming the user — by revealing content one
+            piece at a time, the site maintains focus and encourages deeper
+            attention to each project. The quiet animations, white space, and
+            clean typography all reinforce this sense of calm and focused
+            exploration.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup7" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 7</h2>
+        <div class="popup-content">
+          <h3>
+            7) What is your impression of how the experience should be
+            interacted with over time? (For how long and how many different
+            times)
+          </h3>
+          <p>
+            It feels designed for multiple, short interactions over time. Like
+            an actual advent calendar, it doesn't pressure you to consume
+            everything at once. You can open a few boxes, take a break, and come
+            back later to continue exploring. This episodic interaction style
+            keeps the experience fresh and sustains user curiosity across
+            sessions. It respects your attention span — rewarding even brief
+            visits — but also encourages returning to explore "what's behind the
+            other numbers."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup8" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 8</h2>
+        <div class="popup-content">
+          <h3>
+            8) How does the interactive experience communicate how it should be
+            interacted with over time?
+          </h3>
+          <p>
+            The numbered layout suggests a non-linear, paced approach — you
+            aren't meant to binge it like a scrollable feed. The lack of date
+            labels, titles, or previews reinforces the idea that each
+            interaction is a surprise. The design doesn't enforce urgency or
+            completion — there's no progress tracker or notification system.
+            Instead, it passively invites you back by leaving mysteries
+            unopened. This silent invitation to return is subtle but powerful.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup9" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 9</h2>
+        <div class="popup-content">
+          <h3>
+            9) What other media forms (digital or otherwise) does the experience
+            reference?
+          </h3>
+          <ul>
+            <li>
+              Advent calendars (obviously) — evoking anticipation and a sense of
+              daily reveal.
+            </li>
+            <li>
+              Puzzle games or discovery-based interfaces, where you explore to
+              learn, not consume.
+            </li>
+            <li>
+              Zines or artistic journals, due to the personal tone and visual
+              storytelling.
+            </li>
+            <li>
+              Possibly installation art, where space, movement, and user flow
+              are part of the message.
+            </li>
+          </ul>
+          <p>
+            These references help frame the site as more than a static portfolio
+            — it feels like an interactive exhibit or experience.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup10" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 10</h2>
+        <div class="popup-content">
+          <h3>
+            10) What does this reference/s communicate to you about how you
+            should act when engaging with your research experience?
+          </h3>
+          <p>
+            It tells me I should approach it slowly and curiously, like opening
+            doors in a gallery or flipping pages in a handmade book. There's no
+            pressure to "get through" it — just to enjoy the process of
+            exploration. The advent calendar structure specifically signals that
+            each item deserves its own moment, suggesting a one-at-a-time
+            mindset.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup11" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 11</h2>
+        <div class="popup-content">
+          <h3>
+            11) What does this reference/s communicate to you about how you
+            should feel when engaging with your research experience?
+          </h3>
+          <p>
+            The experience communicates a feeling of playfulness, wonder, and
+            intimacy. It's designed to make you feel invited, not instructed.
+            There's a personal tone to the work — as if the designer is
+            whispering, "Here's a piece of me. Go ahead, open it." It encourages
+            a sense of wonder and reflection, rather than urgency or information
+            gathering.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup12" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 12</h2>
+        <div class="popup-content">
+          <h3>
+            12) What is the most frustrating part of the interaction to you and
+            what makes that part frustrating?
+          </h3>
+          <p>
+            The lack of labels or previews can be a double-edged sword. While it
+            encourages surprise, it also makes revisiting specific projects
+            difficult. If I saw something I liked in box #14 yesterday, I'd have
+            to remember the number or go hunting. There's also no search or
+            overview, so for someone doing in-depth research or needing to
+            quickly locate a project, it might feel inefficient. This limits
+            usability for more goal-oriented tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup13" class="popup-section">
+      <div class="popup">
+        <a href="#" class="popup-close">&times;</a>
+        <h2 class="popup-title">Question 13</h2>
+        <div class="popup-content">
+          <h3>
+            13) What is the most satisfying part of the interaction to you and
+            what makes that part satisfying?
+          </h3>
+          <p>
+            The moment of reveal — when you click a box and a project smoothly
+            slides into view — is deeply satisfying. The contrast between the
+            minimal, mysterious homepage and the richly detailed interior
+            projects creates a delightful rhythm. It feels like you're being
+            rewarded for your curiosity. Additionally, each project has its own
+            design personality, so the diversity of experiences adds to the joy
+            of exploration.
+          </p>
+        </div>
+      </div>
     </div>
   </body>
 </html>
