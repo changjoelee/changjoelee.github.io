@@ -1,12 +1,9 @@
-/* Reset default browser spacing and box model for consistent layout */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Set full viewport size and background for the page */
-/* Note: overflow: hidden disables all scrolling — use carefully */
 html,
 body {
   height: 100%;
@@ -15,25 +12,18 @@ body {
   background-color: #666; /* Gray background */
 }
 
-/* Main grid container for layout */
 .container {
   width: 100%;
   height: 100vh;
   display: grid;
-
-  /* 4 columns — the last one is wider (2.7fr) to emphasize content */
-  grid-template-columns: 1.1fr 1.1fr 1.1fr 2.7fr;
-
-  /* 5 rows evenly distributed */
+  grid-template-columns: 1.1fr 1.1fr 1.1fr 2.7fr; /* Adjusted to make left columns 10% wider */
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-
   border: 1px solid black;
   background-color: white;
 }
 
-/* Styling for h1 in .item1 — responsive sizing and word wrapping */
 .grid-item.item1 h1 {
-  font-size: min(4vw, 4vh, 36px); /* Responsive size with max cap */
+  font-size: min(4vw, 4vh, 36px); /* Responsive font size */
   word-wrap: break-word;
   hyphens: auto;
   padding: 5px;
@@ -42,41 +32,36 @@ body {
   margin-bottom: 10px;
 }
 
-/* Base font setup */
 h1,
 h2,
 p {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-/* Base styling for all grid items */
 .grid-item {
   border: 1px solid black;
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  background-color: black; /* Default background — ensure text contrast */
+  background-color: black;
 }
 
-/* Number label inside grid items */
 .number {
   position: absolute;
   top: 10px;
   left: 10px;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: clamp(14px, 1.5vw, 24px); /* Responsive with min and max */
+  font-size: clamp(14px, 1.5vw, 24px); /* Responsive with minimum and maximum */
   font-weight: bold;
   z-index: 2;
   color: black;
-  transition: color 0.5s ease; /* Smooth color change */
+  transition: color 0.5s ease;
 }
 
-/* Hidden by default — used for popup toggle mechanism */
 .popup-toggle {
   display: none;
 }
 
-/* The clickable door/card area inside a grid item */
 .door {
   position: relative;
   width: 100%;
@@ -87,17 +72,15 @@ p {
   align-items: center;
   text-decoration: none;
   color: #333;
-  transition: transform 0.4s ease-in-out; /* Optional animation effect */
+  transition: transform 0.4s ease-in-out;
 }
 
-/* Door label styling */
 .door span {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 16px; /* 적절한 폰트 크기 조정 */
+  font-weight: bold; /* 필요에 따라 굵게 */
 }
 
-/* Specific positioning and background color for individual items */
 .item1 {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
@@ -121,14 +104,12 @@ p {
   background-color: white;
 }
 
-/* For stacking and vertically centering content */
 .content-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* Large content area — scrollable and padded */
 .content-container-large {
   padding: 20px;
   text-align: left;
@@ -138,7 +119,6 @@ p {
   z-index: 1;
 }
 
-/* Popup overlay — hidden by default */
 .popup-section {
   display: none;
   position: fixed;
@@ -146,18 +126,16 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
 }
 
-/* When popup is targeted by anchor, make it visible */
 .popup-section:target {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Main popup box */
 .popup {
   width: 75%;
   height: 75%;
@@ -166,10 +144,9 @@ p {
   border-radius: 8px;
   position: relative;
   overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Close button inside popup */
 .popup-close {
   position: absolute;
   top: 15px;
@@ -180,26 +157,22 @@ p {
   font-weight: bold;
 }
 
-/* Popup title */
 .popup-title {
   font-size: 28px;
   margin-bottom: 20px;
   color: #333;
 }
 
-/* General content styling inside popup */
 .popup-content {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-/* Subheadings in popup */
 .popup-content h3 {
   font-size: 22px;
   margin-bottom: 15px;
   color: #222;
 }
 
-/* Paragraphs in popup */
 .popup-content p {
   font-size: 16px;
   line-height: 1.6;
@@ -207,23 +180,14 @@ p {
   color: #444;
 }
 
-/* Unordered lists in popup */
 .popup-content ul {
   margin-left: 20px;
   margin-bottom: 15px;
 }
 
-/* List items in popup */
 .popup-content li {
   margin-bottom: 8px;
   line-height: 1.6;
   font-size: 16px;
   color: #444;
 }
-
-/* 
-  📝 Design Choice Commentary:
-  This section uses a minimalist, clean, and grid-based layout to align with the aesthetic of the selected website.
-  The use of whitespace, soft typography, and simple lines supports clarity and focus on content,
-  which is essential in minimalistic web design. The clean structure also enhances usability and visual hierarchy.
-*/
