@@ -1,14 +1,16 @@
-
+/*
+Kevin Powell
+https://youtu.be/cCAtD_BAHNw
 */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-{
-margin: 0;
-padding: 0;
-font: inherit; /* Get rid of all font sizes and heights */
+ {
+  margin: 0;
+  padding: 0;
+  font: inherit; /* Get rid of all font sizes and heights */
 }
 html {
   color-scheme: dark light; /* Default dark /
@@ -42,3 +44,4 @@ p {
     scroll-behavior: smooth;
     scroll-padding-top: 3rem;
   }
+}
