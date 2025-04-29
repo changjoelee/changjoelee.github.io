@@ -1,170 +1,430 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>미디어 플레이어</title>
+    <title>Video Art Player</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Google 폰트 로드 -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Workbench&display=swap"
-      rel="stylesheet"
-    />
-    />
   </head>
-  <body class="body-container">
-    <!-- 웹 왼쪽 상단에 "Assignment 2" 추가 -->
-    <div class="assignment-title bytesized-regular">Assignment 2</div>
+  <body>
+    <div id="container" class="bg-black">
+      <!-- Topographic SVG Background -->
+      <div
+        id="svg-background"
+        class="svg-background opacity-70 neon-pulse"
+      ></div>
 
-    <div class="player-container">
-      <!-- 타이틀 - 왼쪽 위에 추가 -->
-      <div class="player-title bytesized-regular">Media Player</div>
+      <!-- Top Title -->
+      <h1 class="title">Video Art Player</h1>
 
-      <!-- 비디오 플레이어 -->
-      <div class="video-container">
-        <video id="video" class="video-element">
-          <source
-            src="https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/IM-2250/miac.mp4"
-            type="video/mp4"
-          />
-          브라우저가 비디오 태그를 지원하지 않습니다.
-        </video>
+      <div class="player-container">
+        <!-- Top Horizontal Line -->
+        <div class="separator"></div>
 
-        <!-- 비디오 위에 앞/뒤로 버튼과 재생 버튼 -->
-        <div class="overlay-controls">
+        <!-- Video Player -->
+        <div class="video-wrapper">
+          <video id="video" class="video">
+            <!-- Sample Video Source -->
+            <source
+              src="https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/IM-2250/miac.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+
+          <!-- Forward/Backward Buttons and Play Button on Video -->
           <div class="center-controls">
-            <!-- 10초 뒤로 버튼 -->
-            <button class="rewind-button control-button">
-              <div class="button-content">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <polygon points="19 20 9 12 19 4 19 20"></polygon>
-                  <line x1="5" y1="19" x2="5" y2="5"></line>
-                </svg>
-                <span class="text bytesized-regular">10초</span>
-              </div>
-            </button>
+            <div class="center-buttons">
+              <!-- 10 Seconds Backward Button -->
+              <button id="center-rewind" class="center-button rewind-button">
+                <div class="button-content">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="skip-back"
+                  >
+                    <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                    <line x1="5" y1="19" x2="5" y2="5"></line>
+                  </svg>
+                  <span class="button-label">10s</span>
+                </div>
+              </button>
 
-            <!-- 재생/일시정지 버튼 -->
-            <button class="play-button center-play">
-              <div class="icon-container play-icon">
-                <svg class="icon" viewBox="0 0 24 24">
+              <!-- Play/Pause Button -->
+              <button id="center-play" class="center-button play-button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="play-icon"
+                >
                   <polygon points="5 3 19 12 5 21 5 3"></polygon>
                 </svg>
-              </div>
-              <div class="icon-container pause-icon" style="display: none">
-                <svg class="icon" viewBox="0 0 24 24">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="pause-icon hidden"
+                >
                   <rect x="6" y="4" width="4" height="16"></rect>
                   <rect x="14" y="4" width="4" height="16"></rect>
                 </svg>
-              </div>
-            </button>
+              </button>
 
-            <!-- 10초 앞으로 버튼 -->
-            <button class="forward-button control-button">
-              <div class="button-content">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <polygon points="5 4 15 12 5 20 5 4"></polygon>
-                  <line x1="19" y1="5" x2="19" y2="19"></line>
-                </svg>
-                <span class="text bytesized-regular">10초</span>
-              </div>
-            </button>
+              <!-- 10 Seconds Forward Button -->
+              <button id="center-forward" class="center-button forward-button">
+                <div class="button-content">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="skip-forward"
+                  >
+                    <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                    <line x1="19" y1="5" x2="19" y2="19"></line>
+                  </svg>
+                  <span class="button-label">10s</span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- 진행 막대 -->
-      <div class="progress-container">
-        <div class="progress-bar" id="progress-bar">
-          <div class="progress-fill" id="progress-fill"></div>
+        <!-- Progress Bar -->
+        <div id="progress-container" class="progress-container">
+          <div id="progress-bar" class="progress-bar"></div>
         </div>
-      </div>
 
-      <!-- 시간 표시 -->
-      <div class="time-display bytesized-regular">
-        <span id="current-time">0:00</span>
-        <span id="duration">0:00</span>
-      </div>
+        <!-- Time Display -->
+        <div class="time-display">
+          <span id="current-time">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
 
-      <!-- 컨트롤 버튼 -->
-      <div class="bottom-controls">
-        <div class="left-controls">
-          <!-- 10초 뒤로 버튼 -->
-          <button class="bottom-rewind-button control-button">
-            <div class="button-content">
-              <svg class="icon" viewBox="0 0 24 24">
-                <polygon points="19 20 9 12 19 4 19 20"></polygon>
-                <line x1="5" y1="19" x2="5" y2="5"></line>
-              </svg>
-              <span class="text bytesized-regular">10초</span>
-            </div>
-          </button>
+        <!-- Control Buttons -->
+        <div class="bottom-controls">
+          <div class="left-controls">
+            <!-- 10 Seconds Backward Button -->
+            <button id="bottom-rewind" class="control-button">
+              <div class="button-content">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="skip-back"
+                >
+                  <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                  <line x1="5" y1="19" x2="5" y2="5"></line>
+                </svg>
+                <span class="button-label small">10s</span>
+              </div>
+            </button>
 
-          <!-- 재생/일시정지 버튼 - 하단 컨트롤에만 표시 -->
-          <button class="bottom-play-button">
-            <div class="icon-container bottom-play-icon">
-              <svg class="icon" viewBox="0 0 24 24">
+            <!-- Play/Pause Button -->
+            <button id="bottom-play" class="control-button play-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="play-icon"
+              >
                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
               </svg>
-            </div>
-            <div class="icon-container bottom-pause-icon" style="display: none">
-              <svg class="icon" viewBox="0 0 24 24">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="pause-icon hidden"
+              >
                 <rect x="6" y="4" width="4" height="16"></rect>
                 <rect x="14" y="4" width="4" height="16"></rect>
               </svg>
-            </div>
-          </button>
+            </button>
 
-          <!-- 10초 앞으로 버튼 -->
-          <button class="bottom-forward-button control-button">
-            <div class="button-content">
-              <svg class="icon" viewBox="0 0 24 24">
-                <polygon points="5 4 15 12 5 20 5 4"></polygon>
-                <line x1="19" y1="5" x2="19" y2="19"></line>
-              </svg>
-              <span class="text bytesized-regular">10초</span>
-            </div>
-          </button>
-        </div>
+            <!-- 10 Seconds Forward Button -->
+            <button id="bottom-forward" class="control-button">
+              <div class="button-content">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="skip-forward"
+                >
+                  <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                  <line x1="19" y1="5" x2="19" y2="19"></line>
+                </svg>
+                <span class="button-label small">10s</span>
+              </div>
+            </button>
 
-        <!-- 볼륨 컨트롤 -->
-        <div class="volume-controls">
-          <button class="mute-button">
-            <div class="icon-container volume-icon">
-              <svg class="icon" viewBox="0 0 24 24">
+            <!-- Volume Control -->
+            <button id="mute-button" class="control-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="volume-icon"
+              >
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                <path
-                  d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"
-                ></path>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
               </svg>
-            </div>
-            <div class="icon-container mute-icon" style="display: none">
-              <svg class="icon" viewBox="0 0 24 24">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="mute-icon hidden"
+              >
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                 <line x1="23" y1="9" x2="17" y2="15"></line>
                 <line x1="17" y1="9" x2="23" y2="15"></line>
               </svg>
+            </button>
+            <input
+              id="volume-slider"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="1"
+              class="volume-slider"
+            />
+          </div>
+
+          <div class="right-controls">
+            <!-- Settings Button -->
+            <button id="settings-button" class="control-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="settings-icon"
+              >
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                ></path>
+              </svg>
+            </button>
+
+            <!-- Settings Menu (Playback Speed and Quality Settings) -->
+            <div id="settings-menu" class="settings-menu hidden">
+              <!-- Main Settings Menu -->
+              <div id="main-settings" class="settings-panel">
+                <button id="speed-menu-button" class="settings-item">
+                  <span>Playback Speed</span>
+                  <span id="current-speed" class="settings-value">1x</span>
+                </button>
+                <button id="quality-menu-button" class="settings-item">
+                  <span>Quality</span>
+                  <span id="current-quality" class="settings-value">720p</span>
+                </button>
+              </div>
+
+              <!-- Playback Speed Submenu -->
+              <div id="speed-menu" class="settings-panel hidden">
+                <button id="speed-back-button" class="settings-back-button">
+                  ← Back
+                </button>
+                <div class="settings-divider"></div>
+                <button class="speed-option" data-speed="0.25">0.25x</button>
+                <button class="speed-option" data-speed="0.5">0.5x</button>
+                <button class="speed-option" data-speed="0.75">0.75x</button>
+                <button class="speed-option selected" data-speed="1">
+                  1x (Default)
+                </button>
+                <button class="speed-option" data-speed="1.25">1.25x</button>
+                <button class="speed-option" data-speed="1.5">1.5x</button>
+                <button class="speed-option" data-speed="1.75">1.75x</button>
+                <button class="speed-option" data-speed="2">2x</button>
+              </div>
+
+              <!-- Quality Submenu -->
+              <div id="quality-menu" class="settings-panel hidden">
+                <button id="quality-back-button" class="settings-back-button">
+                  ← Back
+                </button>
+                <div class="settings-divider"></div>
+                <button
+                  class="quality-option"
+                  data-quality="1080p"
+                  data-src="https://file-examples.com/storage/fefb234bc0648a3ed4d0ce5/2017/04/file_example_MP4_1080_10MG.mp4"
+                >
+                  1080p HD
+                </button>
+                <button
+                  class="quality-option selected"
+                  data-quality="720p"
+                  data-src="https://file-examples.com/storage/fefb234bc0648a3ed4d0ce5/2017/04/file_example_MP4_720_5MG.mp4"
+                >
+                  720p HD
+                </button>
+                <button
+                  class="quality-option"
+                  data-quality="480p"
+                  data-src="https://file-examples.com/storage/fefb234bc0648a3ed4d0ce5/2017/04/file_example_MP4_480_1_5MG.mp4"
+                >
+                  480p
+                </button>
+                <button
+                  class="quality-option"
+                  data-quality="360p"
+                  data-src="https://file-examples.com/storage/fefb234bc0648a3ed4d0ce5/2017/04/file_example_MP4_360_1MB.mp4"
+                >
+                  360p
+                </button>
+                <button
+                  class="quality-option"
+                  data-quality="240p"
+                  data-src="https://www.w3schools.com/html/mov_bbb.mp4"
+                >
+                  240p
+                </button>
+              </div>
             </div>
-          </button>
-          <input
-            type="range"
-            id="volume-slider"
-            min="0"
-            max="1"
-            step="0.01"
-            value="1"
-            class="volume-slider"
-          />
+
+            <!-- Fullscreen Button -->
+            <button id="fullscreen-button" class="control-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="fullscreen-icon"
+              >
+                <path
+                  d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Playback Speed Indicator -->
+        <div id="speed-indicator" class="speed-indicator hidden">
+          <span>Playback Speed: <span id="speed-value">1x</span></span>
+        </div>
+
+        <!-- Bottom Horizontal Line -->
+        <div class="separator"></div>
+      </div>
+
+      <!-- Description and Comments Area -->
+      <div class="content-area">
+        <!-- Video Description -->
+        <div class="video-description">
+          <p>
+            This media player is currently playing a sample video. To use your
+            own video, modify the source element in the video tag.
+          </p>
+          <p>
+            Cinema effect: The background darkens during playback and brightens
+            when paused.
+          </p>
+          <p>
+            <span class="new-badge">NEW</span>
+            Playback speed control and quality selection features have been
+            added!
+          </p>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+          <div class="comments-header">
+            <h2>Comments (<span id="comments-count">3</span>)</h2>
+            <button id="toggle-comments">Collapse</button>
+          </div>
+
+          <div id="comments-container">
+            <!-- Comment Input Area -->
+            <div class="comment-input">
+              <input
+                type="text"
+                id="new-comment"
+                placeholder="Enter your comment..."
+              />
+              <button id="add-comment">Submit</button>
+            </div>
+
+            <!-- Comments List -->
+            <div id="comments-list" class="comments-list">
+              <!-- Comments are dynamically generated by JavaScript -->
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- 설명 -->
-    <div class="description bytesized-regular">
-      <p>
-        이 미디어 플레이어는 현재 샘플 영상을 재생합니다. 자신의 영상으로
-        교체하려면 코드에서 video 태그의 source 요소를 수정하세요.
-      </p>
     </div>
 
     <script src="script.js"></script>
