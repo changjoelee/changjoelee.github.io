@@ -13,23 +13,23 @@
   </head>
   <body>
     <div id="container" class="bg-black">
-      <!-- Topographic SVG Background -->
+      <!-- 토포그래픽 SVG 배경 - 독특한 시각적 효과를 위한 동적 배경 요소 -->
       <div
         id="svg-background"
         class="svg-background opacity-70 neon-pulse"
       ></div>
 
-      <!-- Top Title -->
+      <!-- 상단 타이틀 - 플레이어의 메인 헤더 -->
       <h1 class="title">Video Art Player</h1>
 
       <div class="player-container">
-        <!-- Top Horizontal Line -->
+        <!-- 상단 구분선 - 디자인 요소 -->
         <div class="separator"></div>
 
-        <!-- Video Player -->
+        <!-- 비디오 플레이어 - 핵심 미디어 표시 영역 -->
         <div class="video-wrapper">
           <video id="video" class="video">
-            <!-- Sample Video Source -->
+            <!-- 비디오 소스 - 기본 샘플 비디오 -->
             <source
               src="https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/IM-2250/miac.mp4"
               type="video/mp4"
@@ -37,10 +37,10 @@
             Your browser does not support the video tag.
           </video>
 
-          <!-- Forward/Backward Buttons and Play Button on Video -->
+          <!-- 비디오 위 중앙 컨트롤 버튼 - 사용자 상호작용을 위한 직관적인 컨트롤 -->
           <div class="center-controls">
             <div class="center-buttons">
-              <!-- 10 Seconds Backward Button -->
+              <!-- 10초 뒤로 버튼 - 빠른 뒤로가기 기능 -->
               <button id="center-rewind" class="center-button rewind-button">
                 <div class="button-content">
                   <svg
@@ -62,7 +62,7 @@
                 </div>
               </button>
 
-              <!-- Play/Pause Button -->
+              <!-- 재생/일시정지 버튼 - 비디오 재생 상태 토글 -->
               <button id="center-play" class="center-button play-button">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@
                 </svg>
               </button>
 
-              <!-- 10 Seconds Forward Button -->
+              <!-- 10초 앞으로 버튼 - 빠른 앞으로가기 기능 -->
               <button id="center-forward" class="center-button forward-button">
                 <div class="button-content">
                   <svg
@@ -120,21 +120,21 @@
           </div>
         </div>
 
-        <!-- Progress Bar -->
+        <!-- 프로그레스 바 - 비디오 진행 상황 시각화 -->
         <div id="progress-container" class="progress-container">
           <div id="progress-bar" class="progress-bar"></div>
         </div>
 
-        <!-- Time Display -->
+        <!-- 시간 표시 - 현재 시간과 총 길이 표시 -->
         <div class="time-display">
           <span id="current-time">0:00</span>
           <span id="duration">0:00</span>
         </div>
 
-        <!-- Control Buttons -->
+        <!-- 하단 컨트롤 버튼 - 추가 기능 접근을 위한 컨트롤 -->
         <div class="bottom-controls">
           <div class="left-controls">
-            <!-- 10 Seconds Backward Button -->
+            <!-- 10초 뒤로 버튼 - 하단에 위치한 컨트롤 -->
             <button id="bottom-rewind" class="control-button">
               <div class="button-content">
                 <svg
@@ -156,7 +156,7 @@
               </div>
             </button>
 
-            <!-- Play/Pause Button -->
+            <!-- 재생/일시정지 버튼 - 하단에 위치한 컨트롤 -->
             <button id="bottom-play" class="control-button play-button">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +189,7 @@
               </svg>
             </button>
 
-            <!-- 10 Seconds Forward Button -->
+            <!-- 10초 앞으로 버튼 - 하단에 위치한 컨트롤 -->
             <button id="bottom-forward" class="control-button">
               <div class="button-content">
                 <svg
@@ -211,7 +211,7 @@
               </div>
             </button>
 
-            <!-- Volume Control -->
+            <!-- 볼륨 컨트롤 - 음소거 토글과 볼륨 슬라이더 -->
             <button id="mute-button" class="control-button">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +258,7 @@
           </div>
 
           <div class="right-controls">
-            <!-- Settings Button -->
+            <!-- 설정 버튼 - 재생 속도 설정 등 추가 옵션 -->
             <button id="settings-button" class="control-button">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -279,21 +279,17 @@
               </svg>
             </button>
 
-            <!-- Settings Menu (Playback Speed and Quality Settings) -->
+            <!-- 설정 메뉴 (재생 속도 설정) -->
             <div id="settings-menu" class="settings-menu hidden">
-              <!-- Main Settings Menu -->
+              <!-- 메인 설정 메뉴 -->
               <div id="main-settings" class="settings-panel">
                 <button id="speed-menu-button" class="settings-item">
                   <span>Playback Speed</span>
                   <span id="current-speed" class="settings-value">1x</span>
                 </button>
-                <button id="quality-menu-button" class="settings-item">
-                  <span>Quality</span>
-                  <span id="current-quality" class="settings-value">720p</span>
-                </button>
               </div>
 
-              <!-- Playback Speed Submenu -->
+              <!-- 재생 속도 서브메뉴 -->
               <div id="speed-menu" class="settings-panel hidden">
                 <button id="speed-back-button" class="settings-back-button">
                   ← Back
@@ -312,7 +308,7 @@
               </div>
             </div>
 
-            <!-- Fullscreen Button -->
+            <!-- 전체화면 버튼 - 비디오를 전체화면으로 전환 -->
             <button id="fullscreen-button" class="control-button">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -334,43 +330,42 @@
           </div>
         </div>
 
-        <!-- Playback Speed Indicator -->
+        <!-- 재생 속도 표시기 - 사용자에게 현재 재생 속도를 알려줌 -->
         <div id="speed-indicator" class="speed-indicator hidden">
           <span>Playback Speed: <span id="speed-value">1x</span></span>
         </div>
 
-        <!-- Bottom Horizontal Line -->
+        <!-- 하단 구분선 - 디자인 요소 -->
         <div class="separator"></div>
       </div>
 
-      <!-- Description and Comments Area -->
+      <!-- 설명 및 댓글 영역 -->
       <div class="content-area">
-        <!-- Video Description -->
+        <!-- 비디오 설명 - 현재 비디오에 대한 정보 제공 -->
         <div class="video-description">
-          <span class="new-badge">Note!!</span>
           <p>
-            This video is a piece of video art that expresses a dreamy
-            atmosphere through blurry visuals and repetitive transitions. Rather
-            than following a clear narrative, it focuses on mood and emotion,
-            accompanied by calm electronic music that enhances the sense of
-            immersion. The work is intentionally open-ended, inviting each
-            viewer to interpret it in their own way.
+            This media player is currently playing a sample video. To use your
+            own video, modify the source element in the video tag.
           </p>
           <p>
             Cinema effect: The background darkens during playback and brightens
             when paused.
           </p>
+          <p>
+            <span class="new-badge">NEW</span>
+            Playback speed control has been added!
+          </p>
         </div>
 
-        <!-- Comments Section -->
+        <!-- 댓글 섹션 - 사용자 상호작용 증대 -->
         <div class="comments-section">
           <div class="comments-header">
-            <h2>Comments (<span id="comments-count">0</span>)</h2>
+            <h2>Comments (<span id="comments-count">3</span>)</h2>
             <button id="toggle-comments">Collapse</button>
           </div>
 
           <div id="comments-container">
-            <!-- Comment Input Area -->
+            <!-- 댓글 입력 영역 - 새 댓글 작성 -->
             <div class="comment-input">
               <input
                 type="text"
@@ -380,20 +375,13 @@
               <button id="add-comment">Submit</button>
             </div>
 
-            <!-- Comments List -->
+            <!-- 댓글 목록 - 자바스크립트로 동적 생성 -->
             <div id="comments-list" class="comments-list">
               <!-- Comments are dynamically generated by JavaScript -->
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Footer with assignment information -->
-      <footer class="footer">
-        <p>S3879959 Chamgjoe Lee</p>
-        <p>Interactive Media (OART1013) Assignment 2</p>
-        <p>School of Communication and Design, RMIT</p>
-      </footer>
     </div>
 
     <script src="script.js"></script>

@@ -1,0 +1,115 @@
+/* 기본 스타일 - 페이지 전체의 초기화 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* Workbench 폰트 사용 - 독특한 디자인 효과를 위해 선택 */
+  font-family: "Workbench", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "BLED" 0, "SCAN" -22;
+  background-color: #000;
+}
+
+/* 컨테이너 - 전체 앱을 감싸는 메인 컨테이너 */
+#container {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 5rem;
+  transition: background-color 1s ease; /* 재생 시 배경색 전환 효과 */
+}
+
+/* 배경색 클래스 - 재생 상태에 따라 배경 전환 */
+.bg-black {
+  background-color: #000; /* 재생 중 어두운 배경 (영화관 효과) */
+}
+
+.bg-white {
+  background-color: #fff; /* 일시정지 시 밝은 배경 */
+}
+
+/* 토포그래픽 배경 - 동적 SVG 배경으로 시각적 효과 제공 */
+.svg-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  transition: opacity 1s ease; /* 배경 투명도 부드러운 전환 */
+}
+
+/* 배경 투명도 클래스 */
+.opacity-30 {
+  opacity: 0.3; /* 일시정지 시 배경 투명도 */
+}
+
+.opacity-70 {
+  opacity: 0.7; /* 재생 시 배경 투명도 */
+}
+
+/* 제목 스타일 - 상단 타이틀의 스타일링 */
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ec4899; /* 핑크 계열 색상으로 네온 효과 */
+  margin-bottom: 2rem;
+  text-align: center;
+  /* 네온 효과를 위한 그림자 설정 */
+  text-shadow: 0 0 10px #a855f7, 0 0 20px #7e22ce, 0 0 30px #6b21a8;
+  position: relative;
+  z-index: 10;
+  padding-top: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+/* 플레이어 컨테이너 - 비디오 플레이어 및 컨트롤을 감싸는 박스 */
+.player-container {
+  background-color: #4c1d95; /* 보라색 배경으로 현대적 느낌 */
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  padding-bottom: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  width: 90%;
+  max-width: 56rem;
+  border: 1px solid #7e22ce; /* 보라색 테두리로 경계 강조 */
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+}
+
+/* 구분선 - 시각적 분리를 위한 라인 */
+.separator {
+  width: 100%;
+  height: 1px;
+  background-color: #ec4899; /* 핑크 계열 색상으로 강조 */
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.separator:last-child {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* 비디오 래퍼 - 비디오 요소를 감싸는 컨테이너 */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 표준 비디오 비율 유지 */
+  background-color: #000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  cursor: pointer; /* 클릭시 재생/일시정지 기능 강조 */
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 비디오 비율 유지 */
+}
