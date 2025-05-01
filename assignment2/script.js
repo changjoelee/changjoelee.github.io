@@ -377,21 +377,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const initialComments = [
     {
       id: 1,
-      author: "MovieLover",
+      author: "Unknown User 1",
       text: "The colors in this video are beautiful!",
       time: "3 days ago",
       likes: 12,
     },
     {
       id: 2,
-      author: "VideoArtist",
+      author: "Unknown User 2",
       text: "What software was used to create these effects?",
       time: "2 days ago",
       likes: 5,
     },
     {
       id: 3,
-      author: "MediaGuy",
+      author: "Unknown User 3",
       text: "The background music is perfect. Amazing visuals.",
       time: "1 day ago",
       likes: 8,
