@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a0a;
+  overflow: hidden;
+  cursor: crosshair;
+  font-family: "Courier New", monospace;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.time-particle {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 2;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.observer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #00ffff;
+  font-size: 16px;
+  text-align: center;
+  z-index: 3;
+  pointer-events: none;
+  text-shadow: 0 0 20px #00ffff, 0 0 40px #0080ff;
+  font-weight: bold;
+  margin-top: 80px;
+}
+
+.time-trail {
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 50, 50, 0.9),
+    rgba(200, 20, 20, 0.7),
+    rgba(150, 10, 10, 0.5),
+    rgba(100, 0, 0, 0.3),
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 0 15px rgba(255, 50, 50, 0.6), inset 0 0 5px rgba(0, 0, 0, 0.8);
+  border-radius: 0;
+}
+
+.instruction {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ff4081;
+  font-size: 14px;
+  text-align: center;
+  z-index: 4;
+  line-height: 1.6;
+  text-shadow: 0 0 15px #ff4081, 0 0 30px #ff6b9d;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.clock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ff6b6b;
+  font-size: 48px;
+  font-weight: bold;
+  z-index: 4;
+  text-shadow: 0 0 30px #ff6b6b, 0 0 60px #ff9999, 0 0 90px #ffcccc;
+  letter-spacing: 3px;
+  text-align: center;
+  pointer-events: none;
+  margin-top: -40px;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Slop Archive</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: white;
+        border: 2px solid #000;
+        min-height: 100vh;
+      }
+
+      .header {
+        text-align: center;
+        padding: 20px;
+        border-bottom: 2px solid #000;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #000;
+      }
+
+      .nav {
+        display: flex;
+        border-bottom: 2px solid #000;
+      }
+
+      .nav-item {
+        flex: 1;
+        padding: 12px;
+        text-align: center;
+        border-right: 2px solid #000;
+        background-color: #f8f8f8;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .nav-item:last-child {
+        border-right: none;
+      }
+
+      .nav-item:hover {
+        background-color: #e0e0e0;
+      }
+
+      .nav-item.active {
+        background-color: #d0d0d0;
+        font-weight: bold;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .instructions {
+        margin-bottom: 30px;
+      }
+
+      .instructions h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        color: #000;
+      }
+
+      .instructions p {
+        font-size: 1.1rem;
+        color: #333;
+        line-height: 1.4;
+      }
+
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        border: 2px solid #000;
+        margin-bottom: 30px;
+      }
+
+      .image-item {
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.2s;
+        border-right: 2px solid #000;
+        border-bottom: 2px solid #000;
+      }
+
+      .image-item:nth-child(3n) {
+        border-right: none;
+      }
+
+      .image-item:hover {
+        transform: scale(1.02);
+      }
+
+      .image-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .image-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px;
+        font-size: 0.85rem;
+        line-height: 1.2;
+      }
+
+      .mini-game-section {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+
+      .mini-game {
+        width: 600px;
+        height: 120px;
+        background-color: #000;
+        border: 4px solid #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .mini-game:hover {
+        background-color: #333;
+      }
+
+      .mini-game-title {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .mini-game-subtitle {
+        color: #ccc;
+        font-size: 0.9rem;
+      }
+
+      .footer {
+        height: 150px;
+        background-color: #000;
+        border-top: 2px solid #000;
+      }
+
+      /* Placeholder images using CSS art */
+      .placeholder-1 {
+        background: radial-gradient(
+          circle at 30% 70%,
+          #ffd700 10%,
+          #ff8c00 30%,
+          #8b4513 60%,
+          #2c1810 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .placeholder-1::before {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(
+          circle,
+          #ffff99 20%,
+          #ffd700 40%,
+          #ff8c00 80%
+        );
+        border-radius: 50%;
+        top: 25%;
+        left: 60%;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+      }
+
+      .placeholder-1::after {
+        content: "";
+        position: absolute;
+        width: 25px;
+        height: 15px;
+        background: #8b4513;
+        bottom: 30%;
+        left: 20%;
+        border-radius: 3px;
+        box-shadow: 30px 10px 0 #654321, -10px 20px 0 #8b4513,
+          50px -5px 0 #a0522d;
+      }
+
+      .placeholder-2 {
+        background: linear-gradient(
+          to bottom,
+          #001a33 0%,
+          #003366 30%,
+          #1e3a5f 70%,
+          #2c5282 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .placeholder-2::before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        border-top: 60px solid #87ceeb;
+        top: 20%;
+        left: 40%;
+        opacity: 0.9;
+        filter: blur(1px);
+        animation: lightning 2s infinite;
+      }
+
+      .placeholder-2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(20, 40, 60, 0.6) 30%,
+          rgba(30, 60, 90, 0.4) 60%,
+          transparent 100%
+        );
+      }
+
+      @keyframes lightning {
+        0%,
+        90%,
+        100% {
+          opacity: 0;
+        }
+        5%,
+        85% {
+          opacity: 1;
+        }
+      }
+
+      .placeholder-3 {
+        background: linear-gradient(
+          135deg,
+          #1a0033 0%,
+          #330066 20%,
+          #660033 40%,
+          #990066 60%,
+          #cc0066 80%,
+          #ff0080 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .placeholder-3::before {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 50px;
+        background: linear-gradient(to bottom, #333 0%, #111 100%);
+        bottom: 20%;
+        right: 40%;
+        border-radius: 4px 4px 0 0;
+      }
+
+      .placeholder-3::after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: #222;
+        border-radius: 50%;
+        bottom: 65%;
+        right: 36%;
+        box-shadow: 0 8px 0 #333, -3px 25px 0 #111, 3px 25px 0 #111;
+      }
+
+      /* Neon light effects for placeholder 3 */
+      .placeholder-3 {
+        position: relative;
+      }
+
+      .placeholder-3::before {
+        box-shadow: 2px 0 0 #00ffff, 4px 0 0 #ff00ff, 6px 0 0 #ffff00;
+      }
+
+      /* Additional placeholders */
+      .placeholder-4 {
+        background: linear-gradient(
+          45deg,
+          #ff6b6b 0%,
+          #4ecdc4 25%,
+          #45b7d1 50%,
+          #96ceb4 75%,
+          #feca57 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .placeholder-4::before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 30px solid transparent;
+        border-right: 30px solid transparent;
+        border-bottom: 50px solid rgba(255, 255, 255, 0.3);
+        top: 20%;
+        left: 30%;
+        transform: rotate(45deg);
+      }
+
+      .placeholder-4::after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        top: 60%;
+        right: 25%;
+        animation: spin 3s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .placeholder-5 {
+        background: linear-gradient(
+          to bottom,
+          #87ceeb 0%,
+          #98fb98 30%,
+          #dda0dd 60%,
+          #f0e68c 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .placeholder-5::before {
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50px;
+        top: 20%;
+        left: 20%;
+        box-shadow: 40px 0 0 rgba(255, 255, 255, 0.6),
+          20px 15px 0 rgba(255, 255, 255, 0.4);
+      }
+
+      .placeholder-5::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom: 80px solid #228b22;
+        bottom: 0;
+        left: 40%;
+        transform: scaleY(-1);
+      }
+
+      .placeholder-6 {
+        background: radial-gradient(
+          circle at center,
+          #fdbcb4 0%,
+          #f4a688 30%,
+          #d4a574 60%,
+          #8b4513 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .placeholder-6::before {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: radial-gradient(circle, #fdbcb4 40%, #d4a574 100%);
+        border-radius: 50%;
+        top: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .placeholder-6::after {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: #333;
+        border-radius: 50%;
+        top: 40%;
+        left: 45%;
+        box-shadow: 10px 0 0 #333, 5px 15px 0 #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>AI Slop Archive</h1>
+      </header>
+
+      <nav class="nav">
+        <div class="nav-item active">Home</div>
+        <div class="nav-item">Archive</div>
+        <div class="nav-item">Mini-game</div>
+        <div class="nav-item">Info</div>
+      </nav>
+
+      <main class="content">
+        <section class="instructions">
+          <h2>Instructions</h2>
+          <p>Click the flowing image to find out the AI's bias</p>
+        </section>
+
+        <section class="image-gallery">
+          <div class="image-item" onclick="checkBias('mystical')">
+            <img
+              src="artbreeder-image-2025-05-04T18_28_29.286Z.jpeg"
+              alt="Mystical floating objects"
+            />
+            <div class="image-caption">
+              Mystical Dreamscape of Floating Objects
+            </div>
+          </div>
+          <div class="image-item" onclick="checkBias('futuristic')">
+            <img
+              src="20250505_0435_Futuristic Stormy Skyline_simple_compose_01jte984k8eed80gfqf1xexw5m.png"
+              alt="Futuristic city"
+            />
+            <div class="image-caption">
+              A futuristic city skyline during a thunderstorm
+            </div>
+          </div>
+          <div class="image-item" onclick="checkBias('mysterious')">
+            <img
+              src="6SWTWVMaUD0YDdK9dRCy--0--d01bg.jpg"
+              alt="Mysterious alley"
+            />
+            <div class="image-caption">
+              A mysterious figure walking through a neon-lit alley
+            </div>
+          </div>
+        </section>
+
+        <section class="mini-game-section">
+          <div class="mini-game" onclick="startMiniGame()">
+            <div class="mini-game-title">Mini-game</div>
+            <div class="mini-game-subtitle">(click to play)</div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer"></footer>
+    </div>
+
+    <script>
+      function checkBias(imageType) {
+        const biasMessages = {
+          mystical:
+            "AI Bias Detected: Tendency towards warm, ethereal imagery with floating objects and magical lighting!",
+          futuristic:
+            "AI Bias Detected: Preference for dramatic urban scenes with electric blue tones and storm elements!",
+          mysterious:
+            "AI Bias Detected: Inclination towards noir aesthetics with neon colors and silhouetted figures!",
+        };
+        alert(biasMessages[imageType]);
+      }
+
+      function startMiniGame() {
+        window.location.href = "mini_game.html";
+      }
+
+      // Navigation functionality
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          const navText = this.textContent;
+
+          if (navText === "Archive") {
+            // Open archive page in new window
+            window.open("archive.html", "_blank");
+            return;
+          }
+
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((nav) => nav.classList.remove("active"));
+          this.classList.add("active");
+
+          if (navText === "Mini-game") {
+            startMiniGame();
+          } else if (navText === "Info") {
+            alert("Navigating to Info page...");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

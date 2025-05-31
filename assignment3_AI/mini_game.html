@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Slop Archive - Cube Grouping Game</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+
+      .top-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        background: #f8f9fa;
+        border-bottom: 2px solid #333;
+        display: flex;
+        align-items: center;
+        padding: 0;
+        z-index: 1000;
+      }
+
+      .home-button {
+        background: #ffffff;
+        border: 2px solid #333;
+        color: #333;
+        font-size: 24px;
+        font-weight: bold;
+        font-family: "Arial", sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        padding: 25px 30px;
+        border-radius: 0;
+        box-shadow: 2px 2px 0 #333;
+        letter-spacing: 1px;
+      }
+
+      .home-button:hover {
+        background: #f0f0f0;
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0 #333;
+      }
+
+      .home-button:active {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0 #333;
+      }
+
+      .game-container {
+        background: #ffffff;
+        border: 2px solid #333;
+        border-radius: 0;
+        width: 90vw;
+        height: calc(80vh - 40px);
+        position: absolute;
+        top: calc(50% + 40px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 1200px;
+        max-height: 800px;
+      }
+
+      .header {
+        display: none;
+      }
+
+      .game-area {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+      }
+
+      .cube {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: #f0f0f0;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        cursor: grab;
+        user-select: none;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+      }
+
+      /* 이미지로 교체할 수 있는 큐브 스타일 */
+      .cube[data-number="1"] {
+        background: linear-gradient(145deg, #ffe6e6, #ffcccc);
+        border-color: #ff9999;
+      }
+
+      .cube[data-number="2"] {
+        background: linear-gradient(145deg, #e6f3ff, #cce7ff);
+        border-color: #99ccff;
+      }
+
+      .cube[data-number="3"] {
+        background: linear-gradient(145deg, #e6ffe6, #ccffcc);
+        border-color: #99ff99;
+      }
+
+      .cube[data-number="4"] {
+        background: linear-gradient(145deg, #fff3e6, #ffe6cc);
+        border-color: #ffcc99;
+      }
+
+      /* 큐브를 이미지로 교체하려면 다음과 같이 사용하세요:
+        .cube[data-number="1"] {
+            background-image: url('path/to/image1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        */
+
+      .cube:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .cube:active,
+      .cube.dragging {
+        cursor: grabbing;
+        transform: scale(1.1);
+        z-index: 100;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .corner-zone {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border: 2px dashed #999;
+        border-radius: 4px;
+        background: rgba(240, 240, 240, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .corner-zone.active {
+        border-color: #28a745;
+        background: rgba(40, 167, 69, 0.1);
+        border-style: solid;
+      }
+
+      .corner-top-left {
+        top: 30px;
+        left: 30px;
+      }
+      .corner-top-right {
+        top: 30px;
+        right: 30px;
+      }
+      .corner-bottom-left {
+        bottom: 30px;
+        left: 30px;
+      }
+      .corner-bottom-right {
+        bottom: 30px;
+        right: 30px;
+      }
+
+      .popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        z-index: 1000;
+        transition: transform 0.3s ease;
+        border: 2px solid #28a745;
+      }
+
+      .popup.show {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .popup h2 {
+        color: #28a745;
+        font-size: 24px;
+        margin-bottom: 15px;
+        animation: bounce 0.6s ease-in-out;
+      }
+
+      .popup p {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .restart-btn {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .restart-btn:hover {
+        background: #1e7e34;
+      }
+
+      .instructions {
+        display: none;
+      }
+
+      .instruction-popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        z-index: 1000;
+        border: 2px solid #007bff;
+        max-width: 400px;
+      }
+
+      .instruction-popup h3 {
+        color: #007bff;
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-top: 0;
+      }
+
+      .instruction-popup p {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .start-btn {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .start-btn:hover {
+        background: #0056b3;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        60%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        80% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+
+      .overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-header">
+      <button class="home-button" onclick="goHome()">AI Slop Archive</button>
+    </div>
+
+    <div class="game-container">
+      <div class="header" style="display: none">
+        <button class="home-button" onclick="goHome()">AI Slop Archive</button>
+      </div>
+      <div class="game-area">
+        <div class="instructions">
+          <strong>Instructions:</strong><br />
+          Group cubes by matching numbers! Put all 1s in one corner, all 2s in
+          another, etc. Each corner needs exactly 3 matching cubes to win!
+        </div>
+
+        <!-- Corner zones -->
+        <div class="corner-zone corner-top-left" data-corner="tl"></div>
+        <div class="corner-zone corner-top-right" data-corner="tr"></div>
+        <div class="corner-zone corner-bottom-left" data-corner="bl"></div>
+        <div class="corner-zone corner-bottom-right" data-corner="br"></div>
+
+        <!-- Cubes will be generated by JavaScript -->
+      </div>
+
+      <div class="overlay show"></div>
+      <div class="instruction-popup">
+        <h3>🎮 How to Play</h3>
+        <p><strong>Objective:</strong> Group cubes by matching numbers!</p>
+        <p>
+          • Drag cubes to move them around<br />
+          • Put all 1s in one corner, all 2s in another corner, etc.<br />
+          • Each corner needs exactly 3 matching cubes<br />
+          • Complete all 4 corners to win!
+        </p>
+        <button class="start-btn" onclick="startGame()">Start Game</button>
+      </div>
+
+      <div class="overlay"></div>
+      <div class="popup">
+        <h2>🎉 Congratulations! 🎉</h2>
+        <p>
+          You successfully grouped all matching cubes into separate corners!
+        </p>
+        <button class="restart-btn" onclick="restartGame()">Play Again</button>
+      </div>
+    </div>
+
+    <script>
+      let cubes = [];
+      let draggedCube = null;
+      let offset = { x: 0, y: 0 };
+
+      function createCubes() {
+        const gameArea = document.querySelector(".game-area");
+        const existingCubes = document.querySelectorAll(".cube");
+        existingCubes.forEach((cube) => cube.remove());
+
+        cubes = [];
+
+        // Create 12 cubes with numbers 1,2,3,4 repeating (3 of each)
+        const numbers = [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4];
+        const colors = {
+          1: "linear-gradient(145deg, #ffe6e6, #ffcccc)", // Light red
+          2: "linear-gradient(145deg, #e6f3ff, #cce7ff)", // Light blue
+          3: "linear-gradient(145deg, #e6ffe6, #ccffcc)", // Light green
+          4: "linear-gradient(145deg, #fff3e6, #ffe6cc)", // Light orange
+        };
+
+        // Shuffle the numbers array
+        for (let i = numbers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+        }
+
+        for (let i = 0; i < 12; i++) {
+          const cube = document.createElement("div");
+          cube.className = "cube";
+          cube.textContent = numbers[i];
+          cube.dataset.number = numbers[i];
+          cube.style.background = colors[numbers[i]];
+
+          // Random position avoiding corners
+          let x, y;
+          do {
+            x = Math.random() * (gameArea.offsetWidth - 60);
+            y = Math.random() * (gameArea.offsetHeight - 60);
+          } while (isInCorner(x, y, gameArea));
+
+          cube.style.left = x + "px";
+          cube.style.top = y + "px";
+
+          // Add event listeners
+          cube.addEventListener("mousedown", startDrag);
+          cube.addEventListener("touchstart", startDrag, { passive: false });
+
+          gameArea.appendChild(cube);
+          cubes.push(cube);
+        }
+      }
+
+      function startGame() {
+        document.querySelector(".overlay").classList.remove("show");
+        document.querySelector(".instruction-popup").style.display = "none";
+        createCubes();
+      }
+
+      function isInCorner(x, y, gameArea) {
+        const cornerSize = 180;
+        const margin = 30;
+
+        // Check if position is in any corner zone
+        return (
+          (x < cornerSize + margin && y < cornerSize + margin) ||
+          (x > gameArea.offsetWidth - cornerSize - margin &&
+            y < cornerSize + margin) ||
+          (x < cornerSize + margin &&
+            y > gameArea.offsetHeight - cornerSize - margin) ||
+          (x > gameArea.offsetWidth - cornerSize - margin &&
+            y > gameArea.offsetHeight - cornerSize - margin)
+        );
+      }
+
+      function startDrag(e) {
+        e.preventDefault();
+        draggedCube = e.target;
+        draggedCube.classList.add("dragging");
+
+        const rect = draggedCube.getBoundingClientRect();
+        const gameRect = document
+          .querySelector(".game-area")
+          .getBoundingClientRect();
+
+        if (e.type === "mousedown") {
+          offset.x = e.clientX - rect.left;
+          offset.y = e.clientY - rect.top;
+          document.addEventListener("mousemove", drag);
+          document.addEventListener("mouseup", endDrag);
+        } else {
+          const touch = e.touches[0];
+          offset.x = touch.clientX - rect.left;
+          offset.y = touch.clientY - rect.top;
+          document.addEventListener("touchmove", drag, { passive: false });
+          document.addEventListener("touchend", endDrag);
+        }
+      }
+
+      function drag(e) {
+        if (!draggedCube) return;
+        e.preventDefault();
+
+        const gameArea = document.querySelector(".game-area");
+        const gameRect = gameArea.getBoundingClientRect();
+
+        let clientX, clientY;
+        if (e.type === "mousemove") {
+          clientX = e.clientX;
+          clientY = e.clientY;
+        } else {
+          clientX = e.touches[0].clientX;
+          clientY = e.touches[0].clientY;
+        }
+
+        let x = clientX - gameRect.left - offset.x;
+        let y = clientY - gameRect.top - offset.y;
+
+        // Keep cube within bounds
+        x = Math.max(0, Math.min(x, gameArea.offsetWidth - 60));
+        y = Math.max(0, Math.min(y, gameArea.offsetHeight - 60));
+
+        draggedCube.style.left = x + "px";
+        draggedCube.style.top = y + "px";
+
+        // Highlight corner zones
+        updateCornerHighlights(x + 30, y + 30); // center of cube
+      }
+
+      function endDrag() {
+        if (!draggedCube) return;
+
+        draggedCube.classList.remove("dragging");
+        document.removeEventListener("mousemove", drag);
+        document.removeEventListener("mouseup", endDrag);
+        document.removeEventListener("touchmove", drag);
+        document.removeEventListener("touchend", endDrag);
+
+        // Clear corner highlights
+        document.querySelectorAll(".corner-zone").forEach((zone) => {
+          zone.classList.remove("active");
+        });
+
+        draggedCube = null;
+
+        // Check win condition
+        setTimeout(checkWinCondition, 100);
+      }
+
+      function updateCornerHighlights(cubeX, cubeY) {
+        const zones = document.querySelectorAll(".corner-zone");
+        zones.forEach((zone) => {
+          const rect = zone.getBoundingClientRect();
+          const gameRect = document
+            .querySelector(".game-area")
+            .getBoundingClientRect();
+          const zoneX = rect.left - gameRect.left;
+          const zoneY = rect.top - gameRect.top;
+
+          if (
+            cubeX >= zoneX &&
+            cubeX <= zoneX + 180 &&
+            cubeY >= zoneY &&
+            cubeY <= zoneY + 180
+          ) {
+            zone.classList.add("active");
+          } else {
+            zone.classList.remove("active");
+          }
+        });
+      }
+
+      function checkWinCondition() {
+        const zones = document.querySelectorAll(".corner-zone");
+        let correctCorners = 0;
+
+        zones.forEach((zone) => {
+          const rect = zone.getBoundingClientRect();
+          const gameRect = document
+            .querySelector(".game-area")
+            .getBoundingClientRect();
+          const zoneX = rect.left - gameRect.left;
+          const zoneY = rect.top - gameRect.top;
+
+          let cubesInZone = [];
+          cubes.forEach((cube) => {
+            const cubeX = parseFloat(cube.style.left) + 30;
+            const cubeY = parseFloat(cube.style.top) + 30;
+
+            if (
+              cubeX >= zoneX &&
+              cubeX <= zoneX + 180 &&
+              cubeY >= zoneY &&
+              cubeY <= zoneY + 180
+            ) {
+              cubesInZone.push(parseInt(cube.dataset.number));
+            }
+          });
+
+          // Check if this corner has exactly 3 cubes of the same number
+          if (cubesInZone.length === 3) {
+            const firstNumber = cubesInZone[0];
+            const allSame = cubesInZone.every((num) => num === firstNumber);
+            if (allSame) {
+              correctCorners++;
+              zone.style.borderColor = "#28a745";
+              zone.style.borderStyle = "solid";
+              zone.style.background = "rgba(40, 167, 69, 0.2)";
+            }
+          } else {
+            // Reset corner styling if not correct
+            zone.style.borderColor = "#999";
+            zone.style.borderStyle = "dashed";
+            zone.style.background = "rgba(240, 240, 240, 0.3)";
+          }
+        });
+
+        // Win condition: all 4 corners have 3 matching cubes
+        if (correctCorners === 4) {
+          showWinPopup();
+        }
+      }
+
+      function showWinPopup() {
+        document.querySelector(".overlay").classList.add("show");
+        document.querySelector(".popup").classList.add("show");
+      }
+
+      function restartGame() {
+        document.querySelector(".overlay").classList.remove("show");
+        document.querySelector(".popup").classList.remove("show");
+        createCubes();
+      }
+
+      function goHome() {
+        window.location.href = "index.html";
+      }
+
+      // Initialize game - don't create cubes automatically
+      window.addEventListener("load", function () {
+        // Game will start when user clicks "Start Game" button
+      });
+      window.addEventListener("resize", function () {
+        if (cubes.length > 0) {
+          createCubes();
+        }
+      });
+
+      // Prevent context menu on long press for mobile
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+    </script>
+  </body>
+</html>

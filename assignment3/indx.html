@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time Observer</title>
+    <!-- 
+    "Time Observer" is an interactive web-based artwork where the user does not control time 
+    but instead exists as a silent observer of its flow. Centered around the themes of memory, 
+    pain, and healing, the project allows users to click and drag to leave visual traces on 
+    the screen—deep red wounds that fade slowly or poetic phrases like "the time will heal 
+    your pain" that gently drift away. These interactions symbolize the emotional marks time 
+    leaves behind and how they eventually dissolve. A minimal interface, with a dark background 
+    and crosshair cursor, positions the user as a detached witness, while glowing red horizontal 
+    lines scroll downward to represent the linear passage of time. A live digital clock at the 
+    center reinforces the immediacy of the present moment. Built entirely with HTML, CSS, and 
+    JavaScript, the piece avoids external libraries to preserve full creative control. 
+    "Time Observer" invites reflection on how we engage with the intangible flow of time—not 
+    by holding onto it, but by simply noticing it as it slips through our fingers.
+    -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reset.css"
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <div class="observer">
+      <div style="animation: float 4s ease-in-out infinite">👁</div>
+      <div style="margin-top: 10px; font-size: 12px">Observer</div>
+    </div>
+
+    <div class="clock" id="clock"></div>
+
+    <div class="instruction">
+      Click to leave traces of time<br />
+      Drag to pull at time itself<br />
+      But time... continues to flow
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
