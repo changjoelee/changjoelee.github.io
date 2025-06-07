@@ -180,6 +180,8 @@
         );
         position: relative;
         overflow: hidden;
+        width: 100%;
+        height: 200px;
       }
 
       .placeholder-1::before {
@@ -222,6 +224,8 @@
         );
         position: relative;
         overflow: hidden;
+        width: 100%;
+        height: 200px;
       }
 
       .placeholder-2::before {
@@ -279,6 +283,8 @@
         );
         position: relative;
         overflow: hidden;
+        width: 100%;
+        height: 200px;
       }
 
       .placeholder-3::before {
@@ -290,6 +296,7 @@
         bottom: 20%;
         right: 40%;
         border-radius: 4px 4px 0 0;
+        box-shadow: 2px 0 0 #00ffff, 4px 0 0 #ff00ff, 6px 0 0 #ffff00;
       }
 
       .placeholder-3::after {
@@ -302,137 +309,6 @@
         bottom: 65%;
         right: 36%;
         box-shadow: 0 8px 0 #333, -3px 25px 0 #111, 3px 25px 0 #111;
-      }
-
-      /* Neon light effects for placeholder 3 */
-      .placeholder-3 {
-        position: relative;
-      }
-
-      .placeholder-3::before {
-        box-shadow: 2px 0 0 #00ffff, 4px 0 0 #ff00ff, 6px 0 0 #ffff00;
-      }
-
-      /* Additional placeholders */
-      .placeholder-4 {
-        background: linear-gradient(
-          45deg,
-          #ff6b6b 0%,
-          #4ecdc4 25%,
-          #45b7d1 50%,
-          #96ceb4 75%,
-          #feca57 100%
-        );
-        position: relative;
-        overflow: hidden;
-      }
-
-      .placeholder-4::before {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent;
-        border-bottom: 50px solid rgba(255, 255, 255, 0.3);
-        top: 20%;
-        left: 30%;
-        transform: rotate(45deg);
-      }
-
-      .placeholder-4::after {
-        content: "";
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        border: 4px solid rgba(255, 255, 255, 0.5);
-        border-radius: 50%;
-        top: 60%;
-        right: 25%;
-        animation: spin 3s linear infinite;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .placeholder-5 {
-        background: linear-gradient(
-          to bottom,
-          #87ceeb 0%,
-          #98fb98 30%,
-          #dda0dd 60%,
-          #f0e68c 100%
-        );
-        position: relative;
-        overflow: hidden;
-      }
-
-      .placeholder-5::before {
-        content: "";
-        position: absolute;
-        width: 60px;
-        height: 30px;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 50px;
-        top: 20%;
-        left: 20%;
-        box-shadow: 40px 0 0 rgba(255, 255, 255, 0.6),
-          20px 15px 0 rgba(255, 255, 255, 0.4);
-      }
-
-      .placeholder-5::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-left: 40px solid transparent;
-        border-right: 40px solid transparent;
-        border-bottom: 80px solid #228b22;
-        bottom: 0;
-        left: 40%;
-        transform: scaleY(-1);
-      }
-
-      .placeholder-6 {
-        background: radial-gradient(
-          circle at center,
-          #fdbcb4 0%,
-          #f4a688 30%,
-          #d4a574 60%,
-          #8b4513 100%
-        );
-        position: relative;
-        overflow: hidden;
-      }
-
-      .placeholder-6::before {
-        content: "";
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        background: radial-gradient(circle, #fdbcb4 40%, #d4a574 100%);
-        border-radius: 50%;
-        top: 30%;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .placeholder-6::after {
-        content: "";
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        background: #333;
-        border-radius: 50%;
-        top: 40%;
-        left: 45%;
-        box-shadow: 10px 0 0 #333, 5px 15px 0 #666;
       }
     </style>
   </head>
@@ -452,32 +328,32 @@
       <main class="content">
         <section class="instructions">
           <h2>Instructions</h2>
-          <p>Click the flowing image to find out the AI's bias</p>
+          <p>Click the images to explore different archives</p>
         </section>
 
         <section class="image-gallery">
-          <div class="image-item" onclick="checkBias('mystical')">
+          <div class="image-item" onclick="openImageLink('mystical')">
             <img
-              src="artbreeder-image-2025-05-04T18_28_29.286Z.jpeg"
-              alt="Mystical floating objects"
+              src="20250505_0324_Surreal Dreamscape Wonder_simple_compose_01jte55f0ffrnbp0jgahhqtys5 - Copy.png"
+              alt="Mystical Dreamscape"
             />
             <div class="image-caption">
               Mystical Dreamscape of Floating Objects
             </div>
           </div>
-          <div class="image-item" onclick="checkBias('futuristic')">
+          <div class="image-item" onclick="openImageLink('futuristic')">
             <img
               src="20250505_0435_Futuristic Stormy Skyline_simple_compose_01jte984k8eed80gfqf1xexw5m.png"
-              alt="Futuristic city"
+              alt="Mystical Dreamscape"
             />
             <div class="image-caption">
               A futuristic city skyline during a thunderstorm
             </div>
           </div>
-          <div class="image-item" onclick="checkBias('mysterious')">
+          <div class="image-item" onclick="openImageLink('mysterious')">
             <img
-              src="6SWTWVMaUD0YDdK9dRCy--0--d01bg.jpg"
-              alt="Mysterious alley"
+              src="May 4, 2025, 10_10_18 PM - Copy.png"
+              alt="Mystical Dreamscape"
             />
             <div class="image-caption">
               A mysterious figure walking through a neon-lit alley
@@ -497,16 +373,14 @@
     </div>
 
     <script>
-      function checkBias(imageType) {
-        const biasMessages = {
-          mystical:
-            "AI Bias Detected: Tendency towards warm, ethereal imagery with floating objects and magical lighting!",
-          futuristic:
-            "AI Bias Detected: Preference for dramatic urban scenes with electric blue tones and storm elements!",
-          mysterious:
-            "AI Bias Detected: Inclination towards noir aesthetics with neon colors and silhouetted figures!",
-        };
-        alert(biasMessages[imageType]);
+      function openImageLink(imageType) {
+        if (imageType === "mystical") {
+          window.location.href = "archive1.html";
+        } else if (imageType === "futuristic") {
+          window.location.href = "archive2.html";
+        } else if (imageType === "mysterious") {
+          window.location.href = "archive3.html";
+        }
       }
 
       function startMiniGame() {

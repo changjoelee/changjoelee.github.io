@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Slop Archive - Cube Grouping Game</title>
+    <title>AI Slop Archive - image grouping game</title>
     <style>
       * {
         margin: 0;
@@ -89,15 +89,15 @@
 
       .cube {
         position: absolute;
-        width: 60px;
-        height: 60px;
+        width: 100px;
+        height: 100px;
         background: #f0f0f0;
         border: 2px solid #ccc;
         border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 16px;
+        font-size: 32px;
         font-weight: bold;
         color: #333;
         cursor: grab;
@@ -105,36 +105,96 @@
         transition: all 0.2s ease;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         z-index: 10;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
       }
 
-      /* 이미지로 교체할 수 있는 큐브 스타일 */
-      .cube[data-number="1"] {
-        background: linear-gradient(145deg, #ffe6e6, #ffcccc);
+      /* 각 그룹별로 다른 이미지들 - 파일명만 바꾸면 됩니다! */
+
+      /* 1번 그룹 (3개의 다른 이미지) */
+      .cube[data-number="1"][data-variant="1"] {
+        background-image: url("May\ 4\,\ 2025\,\ 10_10_18\ PM\ -\ Copy.png");
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #ffe6e6;
         border-color: #ff9999;
       }
 
-      .cube[data-number="2"] {
-        background: linear-gradient(145deg, #e6f3ff, #cce7ff);
+      .cube[data-number="1"][data-variant="2"] {
+        background-image: url(pixlr-image-generator-0e467b84-b4b6-4fea-9a27-027a4dcea219\ -\ Copy.png);
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #ffe6e6;
+        border-color: #ff9999;
+      }
+
+      .cube[data-number="1"][data-variant="3"] {
+        background-image: url("a9036edf-c5d8-4b5d-aa42-6e25fcedf716\ -\ Copy.jpg");
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #ffe6e6;
+        border-color: #ff9999;
+      }
+
+      /* 2번 그룹 (3개의 다른 이미지) */
+      .cube[data-number="2"][data-variant="1"] {
+        background-image: url("20250505_0324_Surreal\ Dreamscape\ Wonder_simple_compose_01jte55f0ffrnbp0jgahhqtys5\ -\ Copy.png");
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #e6f3ff;
         border-color: #99ccff;
       }
 
-      .cube[data-number="3"] {
-        background: linear-gradient(145deg, #e6ffe6, #ccffcc);
+      .cube[data-number="2"][data-variant="2"] {
+        background-image: url("pixlr-image-generator-59ee91d1-03ea-453e-b793-57741e8f1498\ -\ Copy.png");
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #e6f3ff;
+        border-color: #99ccff;
+      }
+
+      .cube[data-number="2"][data-variant="3"] {
+        background-image: url("artbreeder-image-2025-05-04T18_28_29.286Z.jpeg");
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #e6f3ff;
+        border-color: #99ccff;
+      }
+
+      /* 3번 그룹 (3개의 다른 이미지) */
+      .cube[data-number="3"][data-variant="1"] {
+        background-image: url("20250505_0435_Futuristic\ Stormy\ Skyline_simple_compose_01jte984k8eed80gfqf1xexw5m.png");
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #e6ffe6;
         border-color: #99ff99;
       }
 
-      .cube[data-number="4"] {
-        background: linear-gradient(145deg, #fff3e6, #ffe6cc);
-        border-color: #ffcc99;
+      .cube[data-number="3"][data-variant="2"] {
+        background-image: url("pixlr-image-generator-1bb79add-d635-4631-9eb1-9fd9cc47d8b6\ -\ Copy.png");
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #e6ffe6;
+        border-color: #99ff99;
       }
 
-      /* 큐브를 이미지로 교체하려면 다음과 같이 사용하세요:
-        .cube[data-number="1"] {
-            background-image: url('path/to/image1.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        */
+      .cube[data-number="3"][data-variant="3"] {
+        background-image: url("f9d82465-4bd6-400a-8825-c21515945594\ -\ Copy.jpg");
+        background-size: 85px 85px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #e6ffe6;
+        border-color: #99ff99;
+      }
 
       .cube:hover {
         transform: scale(1.05);
@@ -157,6 +217,10 @@
         border-radius: 4px;
         background: rgba(240, 240, 240, 0.3);
         transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
       }
 
       .corner-zone.active {
@@ -173,13 +237,49 @@
         top: 30px;
         right: 30px;
       }
-      .corner-bottom-left {
+      .corner-bottom-center {
         bottom: 30px;
-        left: 30px;
+        left: 50%;
+        transform: translateX(-50%);
       }
       .corner-bottom-right {
         bottom: 30px;
         right: 30px;
+      }
+
+      /* 코너 존 힌트 - 대표 이미지 표시 */
+      .corner-top-left::before {
+        content: "";
+        background-image: url("group1-image1.png");
+        background-size: 40px 40px;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 40px;
+        height: 40px;
+        display: block;
+        opacity: 0.3;
+      }
+      .corner-top-right::before {
+        content: "";
+        background-image: url("group2-image1.png");
+        background-size: 40px 40px;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 40px;
+        height: 40px;
+        display: block;
+        opacity: 0.3;
+      }
+      .corner-bottom-center::before {
+        content: "";
+        background-image: url("group3-image1.png");
+        background-size: 40px 40px;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 40px;
+        height: 40px;
+        display: block;
+        opacity: 0.3;
       }
 
       .popup {
@@ -323,39 +423,64 @@
       <div class="game-area">
         <div class="instructions">
           <strong>Instructions:</strong><br />
-          Group cubes by matching numbers! Put all 1s in one corner, all 2s in
-          another, etc. Each corner needs exactly 3 matching cubes to win!
+          Group the image with the same prompt
         </div>
 
-        <!-- Corner zones -->
+        <!-- Corner zones (3개 - 상단 2개, 하단 가운데 1개) -->
         <div class="corner-zone corner-top-left" data-corner="tl"></div>
         <div class="corner-zone corner-top-right" data-corner="tr"></div>
-        <div class="corner-zone corner-bottom-left" data-corner="bl"></div>
-        <div class="corner-zone corner-bottom-right" data-corner="br"></div>
+        <div class="corner-zone corner-bottom-center" data-corner="bc"></div>
 
         <!-- Cubes will be generated by JavaScript -->
       </div>
 
       <div class="overlay show"></div>
       <div class="instruction-popup">
-        <h3>🎮 How to Play</h3>
-        <p><strong>Objective:</strong> Group cubes by matching numbers!</p>
+        <h3>🎮 How to play</h3>
+        <p><strong>Goal:</strong> Group the image with the same pompt!</p>
+
         <p>
-          • Drag cubes to move them around<br />
-          • Put all 1s in one corner, all 2s in another corner, etc.<br />
-          • Each corner needs exactly 3 matching cubes<br />
-          • Complete all 4 corners to win!
+          • Drag the cube to movie<br />
+          • Group the image with the same promt in each corner<br />
+          • Each corners need 3 images<br />
+          • If all 3 images are grouped correctly, You win
         </p>
         <button class="start-btn" onclick="startGame()">Start Game</button>
       </div>
 
       <div class="overlay"></div>
+      <
       <div class="popup">
-        <h2>🎉 Congratulations! 🎉</h2>
-        <p>
-          You successfully grouped all matching cubes into separate corners!
-        </p>
-        <button class="restart-btn" onclick="restartGame()">Play Again</button>
+        <h2>🎉 Congratulation! 🎉</h2>
+        <p>All images are grouped correctly</p>
+        <div class="ai-info">
+          <h3>🤖 About AI-Generated Images</h3>
+          <ul>
+            <li>
+              <strong>Repetitive Patterns:</strong> AI often generates symmetry
+              and patterns due to training on large image datasets.
+            </li>
+            <li>
+              <strong>Style Fusion:</strong> AI combines multiple visual styles
+              into one—sometimes surreal, painterly, or abstract.
+            </li>
+            <li>
+              <strong>Uncanny Details:</strong> Zoom in and you may find
+              oddities like extra fingers, distorted text, or unrealistic
+              reflections.
+            </li>
+            <li>
+              <strong>Prompt-Driven:</strong> The image’s look is largely
+              controlled by the input prompt—so similar prompts = similar
+              images.
+            </li>
+            <li>
+              <strong>Biases:</strong> AI models reflect biases in the data
+              they’re trained on—popular subjects or aesthetics often dominate.
+            </li>
+          </ul>
+        </div>
+        <button class="restart-btn" onclick="restartGame()">다시 하기</button>
       </div>
     </div>
 
@@ -371,33 +496,36 @@
 
         cubes = [];
 
-        // Create 12 cubes with numbers 1,2,3,4 repeating (3 of each)
-        const numbers = [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4];
-        const colors = {
-          1: "linear-gradient(145deg, #ffe6e6, #ffcccc)", // Light red
-          2: "linear-gradient(145deg, #e6f3ff, #cce7ff)", // Light blue
-          3: "linear-gradient(145deg, #e6ffe6, #ccffcc)", // Light green
-          4: "linear-gradient(145deg, #fff3e6, #ffe6cc)", // Light orange
-        };
+        // Create 9 cubes with 3 groups, each having 3 different variants
+        const cubeData = [
+          { group: 1, variant: 1 },
+          { group: 1, variant: 2 },
+          { group: 1, variant: 3 },
+          { group: 2, variant: 1 },
+          { group: 2, variant: 2 },
+          { group: 2, variant: 3 },
+          { group: 3, variant: 1 },
+          { group: 3, variant: 2 },
+          { group: 3, variant: 3 },
+        ];
 
-        // Shuffle the numbers array
-        for (let i = numbers.length - 1; i > 0; i--) {
+        // Shuffle the cube data array
+        for (let i = cubeData.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
-          [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+          [cubeData[i], cubeData[j]] = [cubeData[j], cubeData[i]];
         }
 
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 9; i++) {
           const cube = document.createElement("div");
           cube.className = "cube";
-          cube.textContent = numbers[i];
-          cube.dataset.number = numbers[i];
-          cube.style.background = colors[numbers[i]];
+          cube.dataset.number = cubeData[i].group;
+          cube.dataset.variant = cubeData[i].variant;
 
           // Random position avoiding corners
           let x, y;
           do {
-            x = Math.random() * (gameArea.offsetWidth - 60);
-            y = Math.random() * (gameArea.offsetHeight - 60);
+            x = Math.random() * (gameArea.offsetWidth - 100);
+            y = Math.random() * (gameArea.offsetHeight - 100);
           } while (isInCorner(x, y, gameArea));
 
           cube.style.left = x + "px";
@@ -427,9 +555,8 @@
           (x < cornerSize + margin && y < cornerSize + margin) ||
           (x > gameArea.offsetWidth - cornerSize - margin &&
             y < cornerSize + margin) ||
-          (x < cornerSize + margin &&
-            y > gameArea.offsetHeight - cornerSize - margin) ||
-          (x > gameArea.offsetWidth - cornerSize - margin &&
+          (x > (gameArea.offsetWidth - cornerSize) / 2 - margin &&
+            x < (gameArea.offsetWidth + cornerSize) / 2 + margin &&
             y > gameArea.offsetHeight - cornerSize - margin)
         );
       }
@@ -478,14 +605,14 @@
         let y = clientY - gameRect.top - offset.y;
 
         // Keep cube within bounds
-        x = Math.max(0, Math.min(x, gameArea.offsetWidth - 60));
-        y = Math.max(0, Math.min(y, gameArea.offsetHeight - 60));
+        x = Math.max(0, Math.min(x, gameArea.offsetWidth - 100));
+        y = Math.max(0, Math.min(y, gameArea.offsetHeight - 100));
 
         draggedCube.style.left = x + "px";
         draggedCube.style.top = y + "px";
 
         // Highlight corner zones
-        updateCornerHighlights(x + 30, y + 30); // center of cube
+        updateCornerHighlights(x + 50, y + 50); // center of cube
       }
 
       function endDrag() {
@@ -545,8 +672,8 @@
 
           let cubesInZone = [];
           cubes.forEach((cube) => {
-            const cubeX = parseFloat(cube.style.left) + 30;
-            const cubeY = parseFloat(cube.style.top) + 30;
+            const cubeX = parseFloat(cube.style.left) + 50;
+            const cubeY = parseFloat(cube.style.top) + 50;
 
             if (
               cubeX >= zoneX &&
@@ -576,8 +703,8 @@
           }
         });
 
-        // Win condition: all 4 corners have 3 matching cubes
-        if (correctCorners === 4) {
+        // Win condition: all 3 corners have 3 matching cubes
+        if (correctCorners === 3) {
           showWinPopup();
         }
       }

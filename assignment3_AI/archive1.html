@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Slop Archive</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: white;
+        border: 3px solid black;
+      }
+
+      .header {
+        background-color: #d3d3d3;
+        border-bottom: 3px solid black;
+        padding: 15px 20px;
+      }
+
+      .header h1 {
+        font-size: 32px;
+        font-weight: bold;
+        color: black;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .header h1:hover {
+        color: #333;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        min-height: 700px;
+        border-bottom: 3px solid black;
+      }
+
+      .sidebar {
+        border-right: 3px solid black;
+        padding: 20px;
+        background-color: #f8f8f8;
+      }
+
+      .sidebar-text {
+        font-size: 14px;
+        line-height: 1.4;
+        color: black;
+        margin-bottom: 30px;
+      }
+
+      .gallery {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 15px;
+        height: 780px;
+      }
+
+      .image-container {
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #ccc;
+        cursor: pointer;
+        aspect-ratio: 1 / 1;
+      }
+
+      .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .image-container:hover img {
+        transform: scale(1.05);
+      }
+
+      .image-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        padding: 20px 15px 15px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .image-container:hover .image-overlay {
+        transform: translateY(0);
+      }
+
+      .image-title {
+        background-color: white;
+        color: black;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        display: inline-block;
+      }
+
+      .image-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: black;
+        padding: 3px 8px;
+        border-radius: 10px;
+        font-size: 11px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 onclick="goHome()">AI Slop Archive</h1>
+      </div>
+
+      <div class="content">
+        <div class="sidebar">
+          <div class="sidebar-text">
+            <strong>✅ 5 Common Visual Elements:</strong><br /><br />
+            <strong>1. Floating or Suspended Objects</strong><br />
+            Many images feature objects like clocks, brains, spheres, light
+            bulbs, or hot air balloons floating unnaturally in the sky or space.
+            This creates a strong
+            <strong>surreal or dreamlike atmosphere</strong> by defying gravity
+            and realism.<br /><br />
+
+            <strong>2. Soft Fog or Mist</strong><br />
+            A <strong>hazy, ethereal layer of fog</strong> appears in most of
+            the images, which creates depth and a sense of mystery. It also
+            softens the contrast, enhancing the dreamlike quality.<br /><br />
+
+            <strong>3. Unrealistic Lighting / Glow</strong><br />
+            Some objects glow (like the light bulb, clocks, or balloons) in ways
+            that are physically impossible or exaggerated. This lighting gives
+            the impression of <strong>fantasy or magic</strong>.
+          </div>
+
+          <div class="sidebar-text">
+            <strong>4. Symmetrical or Balanced Composition</strong><br />
+            Most of the compositions are <strong>centered or balanced</strong>,
+            often with horizon lines or vanishing points. This calm structure
+            contrasts with the surreal content, making the scenes
+            <strong>feel peaceful yet uncanny</strong>.<br /><br />
+
+            <strong>5. Nature + Surreal Object Juxtaposition</strong><br />
+            Many images combine <strong>natural landscapes</strong> (mountains,
+            forests, rivers) with
+            <strong>unnatural or manmade elements</strong> (geometric shapes,
+            clocks, or flying objects). This contrast highlights the
+            artificiality of the scene and evokes
+            <strong>philosophical or dreamlike interpretation</strong
+            >.<br /><br />
+
+            <strong>🤖 Why AI Models Generate These Kinds of Results:</strong
+            ><br />
+            <strong>1. Trained on Surrealism and Fantasy Art</strong> - AI
+            models are trained on massive datasets that include paintings,
+            concept art, and fantasy landscapes from artists like Salvador Dalí
+            or contemporary illustrators.<br />
+            <strong>2. Semantic Associations</strong> - Words like
+            <em>dream</em>, <em>fantasy</em>, <em>fog</em>, or
+            <em>surreal</em> are semantically associated with floating objects,
+            soft lighting, and impossible scenarios.<br />
+            <strong>3. Aesthetic Prioritization</strong> - AI tends to favor
+            <strong>visually harmonious</strong> and
+            <strong>emotionally evocative</strong> imagery.<br />
+            <strong>4. Generative Gaps = Creativity</strong> - When prompts
+            leave room for interpretation, AI "fills the gap" by pulling from
+            surreal structures that don't exist in the real world.<br />
+            <strong>5. Echoes of Common Artistic Tropes</strong> - Many visual
+            elements are reminiscent of
+            <strong>common tropes in concept art</strong> which AI replicates
+            due to their over-representation in training data.
+          </div>
+        </div>
+
+        <div class="gallery">
+          <div class="image-container">
+            <img
+              src="20250505_0324_Surreal Dreamscape Wonder_simple_compose_01jte55f0ffrnbp0jgahhqtys5 - Copy.png"
+              alt="Cyberpunk street scene"
+            />
+            <div class="image-overlay">
+              <div class="image-title">By Dall-E</div>
+              <div class="image-tags">
+                <span class="tag">Colored figure</span>
+                <span class="tag">Evil alien characters</span>
+                <span class="tag">Blue and Pink</span>
+                <span class="tag">Dark moody star</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-container">
+            <img
+              src="pixlr-image-generator-59ee91d1-03ea-453e-b793-57741e8f1498 - Copy.png"
+              alt="Neon cyberpunk alley"
+            />
+            <div class="image-overlay">
+              <div class="image-title">By Pixar</div>
+              <div class="image-tags">
+                <span class="tag">Neon lights</span>
+                <span class="tag">Urban decay</span>
+                <span class="tag">Pink glow</span>
+                <span class="tag">Futuristic</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-container">
+            <img src="image.png"Dark cyberpunk street">
+            <div class="image-overlay">
+              <div class="image-title">By Deep</div>
+              <div class="image-tags">
+                <span class="tag">Dark atmosphere</span>
+                <span class="tag">Blue tones</span>
+                <span class="tag">Silhouette</span>
+                <span class="tag">Mysterious</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-container">
+            <img src="download (1) - Copy.png" alt="Cyberpunk corridor" />
+            <div class="image-overlay">
+              <div class="image-title">By Stable Diffusion</div>
+              <div class="image-tags">
+                <span class="tag">Long corridor</span>
+                <span class="tag">Purple hues</span>
+                <span class="tag">Symmetrical</span>
+                <span class="tag">Perspective</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-container">
+            <img
+              src="Firefly_-A surreal dreamscape with floating objects and glowing fog- 993534.jpg"
+              alt="Red neon cyberpunk"
+            />
+            <div class="image-overlay">
+              <div class="image-title">By Firefly</div>
+              <div class="image-tags">
+                <span class="tag">Red dominant</span>
+                <span class="tag">High contrast</span>
+                <span class="tag">Moody lighting</span>
+                <span class="tag">Cinematic</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-container">
+            <img
+              src="artbreeder-image-2025-05-04T18_28_29.286Z.jpeg"
+              alt="Blue cyberpunk hallway"
+            />
+            <div class="image-overlay">
+              <div class="image-title">By Artbreeder</div>
+              <div class="image-tags">
+                <span class="tag">Blue ambiance</span>
+                <span class="tag">Reflective surfaces</span>
+                <span class="tag">Clean lines</span>
+                <span class="tag">Modern tech</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function goHome() {
+        // index.html로 이동
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>
